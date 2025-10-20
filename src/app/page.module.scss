@@ -1,0 +1,25 @@
+@import "../shared/styles/variables";
+@import "../shared/styles/mixins";
+
+.page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.main {
+    flex: 1;
+    padding: $spacing-12 0;
+}
+
+.container {
+    max-width: $breakpoint-xl;
+    margin: 0 auto;
+    padding: 0 $spacing-4;
+
+    @include desktop {
+        padding: 0 $spacing-6;
+    }
+}

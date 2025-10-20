@@ -1,0 +1,132 @@
+@import "../../shared/styles/variables";
+@import "../../shared/styles/mixins";
+
+.header {
+    position: relative;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    border-bottom: 1px solid var(--border-primary);
+    overflow: hidden;
+}
+
+.headerBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+            circle at 20% 50%,
+            rgba(225, 6, 0, 0.1) 0%,
+            transparent 50%
+        ),
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(0, 210, 190, 0.1) 0%,
+            transparent 50%
+        ),
+        radial-gradient(
+            circle at 40% 80%,
+            rgba(255, 135, 0, 0.05) 0%,
+            transparent 50%
+        );
+    pointer-events: none;
+}
+
+.container {
+    max-width: $breakpoint-xl;
+    margin: 0 auto;
+    padding: 0 $spacing-4;
+
+    @include desktop {
+        padding: 0 $spacing-6;
+    }
+}
+
+.headerContent {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacing-8 0;
+    flex-wrap: wrap;
+    gap: $spacing-6;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: $spacing-4;
+}
+
+.logoIcon {
+    font-size: 3rem;
+    filter: drop-shadow(0 0 20px rgba(225, 6, 0, 0.3));
+}
+
+.logoText h1 {
+    font-size: $font-size-4xl;
+    font-weight: $font-weight-medium;
+    text-decoration: wavy;
+    margin: 0;
+    background: linear-gradient(135deg, $f1-red 0%, $f1-orange 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+}
+
+.logoText p {
+    font-size: $font-size-lg;
+    color: var(--text-secondary);
+    margin: 0;
+    font-weight: $font-weight-medium;
+}
+
+.headerActions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-6;
+}
+
+.headerStats {
+    display: flex;
+    gap: $spacing-8;
+}
+
+.stat {
+    text-align: center;
+}
+
+.statNumber {
+    display: block;
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    color: var(--text-accent);
+    line-height: 1;
+    margin-bottom: $spacing-1;
+}
+
+.statLabel {
+    font-size: $font-size-sm;
+    color: var(--text-muted);
+    font-weight: $font-weight-medium;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+@include mobile {
+    .headerContent {
+        flex-direction: column;
+        text-align: center;
+        padding: $spacing-6 0;
+    }
+
+    .headerActions {
+        flex-direction: column;
+        gap: $spacing-4;
+    }
+
+    .headerStats {
+        gap: $spacing-6;
+    }
+}

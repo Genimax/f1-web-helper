@@ -1,0 +1,69 @@
+@import "../../../shared/styles/variables";
+@import "../../../shared/styles/mixins";
+
+.tableSection {
+    padding: $spacing-8;
+    border-bottom: 1px solid var(--border-primary);
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.tableHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-6;
+    flex-wrap: wrap;
+    gap: $spacing-4;
+}
+
+.tableHeader h3 {
+    font-size: $font-size-2xl;
+    color: var(--text-primary);
+    margin: 0;
+    font-weight: $font-weight-semibold;
+}
+
+.tableMeta {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    color: var(--text-muted);
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+}
+
+.divider {
+    color: var(--border-secondary);
+}
+
+.teamInfo {
+    display: flex;
+    align-items: center;
+    gap: $spacing-3;
+}
+
+.teamColor {
+    width: 16px;
+    height: 16px;
+    border-radius: $radius-full;
+    border: 1px solid var(--border-primary);
+}
+
+.teamName {
+    font-weight: $font-weight-medium;
+    color: var(--text-secondary);
+}
+
+.points {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: var(--text-accent);
+}
+
+.stat {
+    font-weight: $font-weight-semibold;
+    color: var(--text-primary);
+}

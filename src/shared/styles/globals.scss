@@ -1,0 +1,278 @@
+@import "./variables";
+@import "./mixins";
+
+// Formula 1 Display Font Face
+@font-face {
+    font-family: "Formula1Display";
+    src: url("/fonts/formula1-display-regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Formula1Display";
+    src: url("/fonts/formula1-display-bold-bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Formula1Display";
+    src: url("/fonts/formula1-display-black.ttf") format("truetype");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+// CSS Reset & Base Styles
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: $font-family-primary;
+    font-size: $font-size-base;
+    font-weight: $font-weight-normal;
+    line-height: 1.6;
+    color: $text-primary;
+    background: $bg-primary;
+    transition: color $transition-normal, background-color $transition-normal;
+    overflow-x: hidden;
+}
+
+// Dark theme (default)
+:root {
+    --bg-primary: #{$bg-primary};
+    --bg-secondary: #{$bg-secondary};
+    --bg-tertiary: #{$bg-tertiary};
+    --bg-card: #{$bg-card};
+    --bg-hover: #{$bg-hover};
+
+    --text-primary: #{$text-primary};
+    --text-secondary: #{$text-secondary};
+    --text-muted: #{$text-muted};
+    --text-accent: #{$text-accent};
+
+    --border-primary: #{$border-primary};
+    --border-secondary: #{$border-secondary};
+    --border-accent: #{$border-accent};
+}
+
+// Light theme
+[data-theme="light"] {
+    --bg-primary: #{$bg-primary-light};
+    --bg-secondary: #{$bg-secondary-light};
+    --bg-tertiary: #{$bg-tertiary-light};
+    --bg-card: #{$bg-card-light};
+    --bg-hover: #{$bg-hover-light};
+
+    --text-primary: #{$text-primary-light};
+    --text-secondary: #{$text-secondary-light};
+    --text-muted: #{$text-muted-light};
+    --text-accent: #{$text-accent-light};
+
+    --border-primary: #{$border-primary-light};
+    --border-secondary: #{$border-secondary-light};
+    --border-accent: #{$border-accent-light};
+}
+
+// Typography
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: $font-weight-bold;
+    line-height: 1.2;
+    margin-bottom: $spacing-4;
+    color: var(--text-primary);
+    letter-spacing: -0.025em;
+}
+
+h1 {
+    font-size: $font-size-5xl;
+    font-weight: $font-weight-extrabold;
+    background: linear-gradient(135deg, $f1-red 0%, $f1-orange 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+h2 {
+    font-size: $font-size-4xl;
+    font-weight: $font-weight-bold;
+}
+
+h3 {
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-semibold;
+}
+
+h4 {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-semibold;
+}
+
+h5 {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-medium;
+}
+
+h6 {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-medium;
+}
+
+p {
+    margin-bottom: $spacing-4;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+a {
+    color: var(--text-accent);
+    text-decoration: none;
+    transition: color $transition-fast;
+    position: relative;
+
+    &:hover {
+        color: lighten($f1-red, 10%);
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--text-accent);
+        transition: width $transition-fast;
+    }
+
+    &:hover::after {
+        width: 100%;
+    }
+}
+
+// Lists
+ul,
+ol {
+    margin-bottom: $spacing-4;
+    padding-left: $spacing-6;
+}
+
+li {
+    margin-bottom: $spacing-2;
+    color: var(--text-secondary);
+}
+
+// Images
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+// Form elements
+input,
+textarea,
+select {
+    font-family: inherit;
+    font-size: inherit;
+    border: 1px solid var(--border-primary);
+    border-radius: $radius-lg;
+    padding: $spacing-3 $spacing-4;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    transition: all $transition-fast;
+
+    &:focus {
+        outline: none;
+        border-color: var(--text-accent);
+        box-shadow: 0 0 0 3px rgba(225, 6, 0, 0.1);
+    }
+
+    &::placeholder {
+        color: var(--text-muted);
+    }
+}
+
+button {
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+    transition: all $transition-fast;
+}
+
+// Utilities
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.container {
+    max-width: $breakpoint-xl;
+    margin: 0 auto;
+    padding: 0 $spacing-4;
+
+    @include desktop {
+        padding: 0 $spacing-6;
+    }
+}
+
+// Scrollbar Styling
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-secondary);
+    border-radius: $radius-full;
+
+    &:hover {
+        background: var(--text-muted);
+    }
+}
+
+// Selection
+::selection {
+    background: rgba(225, 6, 0, 0.2);
+    color: var(--text-primary);
+}
+
+// Focus styles
+:focus-visible {
+    outline: 2px solid var(--text-accent);
+    outline-offset: 2px;
+}

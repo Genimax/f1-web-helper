@@ -1,0 +1,40 @@
+import { Team } from "./types";
+
+export const mockTeams: Team[] = [
+    {
+        id: "1",
+        position: 1,
+        name: "Red Bull Racing",
+        points: 860,
+        wins: 21,
+        podiums: 30,
+        color: "#3671C6",
+        country: "Austria",
+        founded: 2005,
+        drivers: ["Max Verstappen", "Sergio Pérez"],
+    },
+    {
+        id: "2",
+        position: 2,
+        name: "Mercedes",
+        points: 409,
+        wins: 0,
+        podiums: 8,
+        color: "#00D2BE",
+        country: "Germany",
+        founded: 1954,
+        drivers: ["Lewis Hamilton", "George Russell"],
+    },
+    {
+        id: "3",
+        position: 3,
+        name: "Ferrari",
+        points: 406,
+        wins: 1,
+        podiums: 8,
+        color: "#DC143C",
+        country: "Italy",
+        founded: 1929,
+        drivers: ["Charles Leclerc", "Carlos Sainz"],
+    },
+];

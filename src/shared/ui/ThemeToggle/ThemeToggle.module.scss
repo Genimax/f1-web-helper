@@ -1,0 +1,28 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.themeToggle {
+    @include flex-center;
+    width: 48px;
+    height: 48px;
+    border-radius: $radius-full;
+    background: var(--bg-card);
+    border: 1px solid var(--border-primary);
+    transition: all $transition-normal;
+    cursor: pointer;
+
+    &:hover {
+        background: var(--bg-hover);
+        border-color: var(--border-secondary);
+        transform: scale(1.05);
+    }
+}
+
+.themeIcon {
+    font-size: 1.5rem;
+    transition: transform $transition-bounce;
+}
+
+.themeToggle:hover .themeIcon {
+    transform: rotate(180deg);
+}

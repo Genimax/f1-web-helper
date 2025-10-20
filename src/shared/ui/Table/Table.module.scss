@@ -1,0 +1,76 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.table {
+    background: var(--bg-secondary);
+    border-radius: $radius-xl;
+    overflow: hidden;
+    border: 1px solid var(--border-primary);
+}
+
+.tableHead {
+    display: grid;
+    grid-template-columns: 60px 1fr 200px 100px 100px 100px;
+    background: var(--bg-tertiary);
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.tableBody {
+    display: flex;
+    flex-direction: column;
+}
+
+.tableRow {
+    display: grid;
+    grid-template-columns: 60px 1fr 200px 100px 100px 100px;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-primary);
+    transition: all $transition-fast;
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    &:hover {
+        background: var(--bg-hover);
+        transform: translateX(4px);
+    }
+}
+
+.tableHeaderCell,
+.tableCell {
+    padding: $spacing-4;
+    display: flex;
+    align-items: center;
+    font-size: $font-size-sm;
+}
+
+.tableHeaderCell {
+    font-weight: $font-weight-semibold;
+    color: var(--text-primary);
+}
+
+.tableCell {
+    color: var(--text-secondary);
+}
+
+/* Responsive adjustments */
+@include mobile {
+    .tableHead,
+    .tableRow {
+        grid-template-columns: 50px 1fr 150px 80px 80px 80px;
+        font-size: $font-size-xs;
+    }
+
+    .tableHeaderCell,
+    .tableCell {
+        padding: $spacing-3 $spacing-2;
+    }
+}
+
+@include tablet {
+    .tableHead,
+    .tableRow {
+        grid-template-columns: 55px 1fr 180px 90px 90px 90px;
+    }
+}

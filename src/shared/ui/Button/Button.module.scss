@@ -1,0 +1,68 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.button {
+    @include flex-center;
+    gap: $spacing-2;
+    padding: $spacing-3 $spacing-5;
+    border: none;
+    border-radius: $radius-lg;
+    font-family: $font-family-primary;
+    font-weight: $font-weight-medium;
+    cursor: pointer;
+    transition: all $transition-fast;
+    text-decoration: none;
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    &.primary {
+        background: linear-gradient(135deg, $f1-red 0%, $f1-red-dark 100%);
+        color: white;
+        box-shadow: $glow-red;
+
+        &:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 0 30px rgba(225, 6, 0, 0.4);
+        }
+    }
+
+    &.secondary {
+        background: var(--bg-card);
+        color: var(--text-primary);
+        border: 1px solid var(--border-primary);
+
+        &:hover:not(:disabled) {
+            background: var(--bg-hover);
+            border-color: var(--border-secondary);
+            transform: translateY(-1px);
+        }
+    }
+
+    &.ghost {
+        background: transparent;
+        color: var(--text-secondary);
+
+        &:hover:not(:disabled) {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+    }
+
+    &.small {
+        padding: $spacing-2 $spacing-4;
+        font-size: $font-size-sm;
+    }
+
+    &.medium {
+        padding: $spacing-3 $spacing-5;
+        font-size: $font-size-base;
+    }
+
+    &.large {
+        padding: $spacing-4 $spacing-8;
+        font-size: $font-size-lg;
+    }
+}
