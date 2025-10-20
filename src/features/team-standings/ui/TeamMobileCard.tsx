@@ -1,5 +1,6 @@
 import { F1ConstructorChampionshipEntry } from "@/shared/api/types/f1Api";
 import { Badge, MobileCard } from "@/shared/ui";
+import { getPositionVariant } from "@/shared/lib";
 import styles from "./TeamMobileCard.module.scss";
 
 interface TeamMobileCardProps {
@@ -11,13 +12,7 @@ export const TeamMobileCard = ({ team }: TeamMobileCardProps) => {
         <MobileCard className={styles.teamCard}>
             <div className={styles.cardHeader}>
                 <div className={styles.position}>
-                    <Badge
-                        variant={
-                            team.position && team.position <= 3
-                                ? "top"
-                                : "default"
-                        }
-                    >
+                    <Badge variant={getPositionVariant(team.position)}>
                         {team.position || "-"}
                     </Badge>
                 </div>

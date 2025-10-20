@@ -9,3 +9,4 @@ export {
     useIsTablet,
     useIsDesktop,
 } from "./hooks/useMediaQuery";
+export { getPositionVariant } from "./utils/positionUtils";

@@ -45,30 +45,54 @@ export const Table = <T extends Record<string, any>>({
             </div>
 
             <div className={styles.tableBody}>
-                {data.map((row, index) => (
-                    <div
-                        key={index}
-                        className={styles.tableRow}
-                        style={{ gridTemplateColumns }}
-                    >
-                        {columns.map((column) => (
-                            <div
-                                key={column.key}
-                                className={styles.tableCell}
-                                style={{ textAlign: column.align || "left" }}
-                                data-label={column.title}
-                            >
-                                {renderCell
-                                    ? renderCell(
-                                          row[column.key as keyof T],
-                                          column,
-                                          row
-                                      )
-                                    : row[column.key as keyof T]}
-                            </div>
-                        ))}
-                    </div>
-                ))}
+                {data.map((row, index) => {
+                    // Определяем, является ли строка топ-3 позицией
+                    const isTopThree =
+                        (row as any).position && (row as any).position <= 3;
+                    const position = (row as any).position;
+
+                    const getRowClassName = () => {
+                        if (!isTopThree) return styles.tableRow;
+
+                        switch (position) {
+                            case 1:
+                                return `${styles.tableRow} ${styles.goldRow}`;
+                            case 2:
+                                return `${styles.tableRow} ${styles.silverRow}`;
+                            case 3:
+                                return `${styles.tableRow} ${styles.bronzeRow}`;
+                            default:
+                                return styles.tableRow;
+                        }
+                    };
+
+                    return (
+                        <div
+                            key={index}
+                            className={getRowClassName()}
+                            style={{ gridTemplateColumns }}
+                        >
+                            {columns.map((column) => (
+                                <div
+                                    key={column.key}
+                                    className={styles.tableCell}
+                                    style={{
+                                        textAlign: column.align || "left",
+                                    }}
+                                    data-label={column.title}
+                                >
+                                    {renderCell
+                                        ? renderCell(
+                                              row[column.key as keyof T],
+                                              column,
+                                              row
+                                          )
+                                        : row[column.key as keyof T]}
+                                </div>
+                            ))}
+                        </div>
+                    );
+                })}
             </div>
         </div>
     );

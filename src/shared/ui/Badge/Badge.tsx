@@ -2,7 +2,7 @@ import styles from "./Badge.module.scss";
 
 interface BadgeProps {
     children: React.ReactNode;
-    variant?: "default" | "top" | "accent";
+    variant?: "default" | "top" | "accent" | "gold" | "silver" | "bronze";
     size?: "small" | "medium";
     className?: string;
 }

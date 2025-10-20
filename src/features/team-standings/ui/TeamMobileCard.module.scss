@@ -71,3 +71,114 @@
 .stat:first-child .statValue {
     color: var(--text-accent);
 }
+
+// Специальные стили для топ-3 позиций
+.teamCard {
+    &:has([class*="gold"]) {
+        border: 2px solid rgba(255, 215, 0, 0.3);
+        background: linear-gradient(
+            135deg,
+            rgba(255, 215, 0, 0.05) 0%,
+            rgba(255, 215, 0, 0.02) 100%
+        );
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                #ffd700 50%,
+                transparent 100%
+            );
+            border-radius: variables.$radius-lg variables.$radius-lg 0 0;
+        }
+
+        &:hover {
+            border-color: rgba(255, 215, 0, 0.5);
+            background: linear-gradient(
+                135deg,
+                rgba(255, 215, 0, 0.08) 0%,
+                rgba(255, 215, 0, 0.03) 100%
+            );
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.15);
+        }
+    }
+
+    &:has([class*="silver"]) {
+        border: 2px solid rgba(192, 192, 192, 0.3);
+        background: linear-gradient(
+            135deg,
+            rgba(192, 192, 192, 0.05) 0%,
+            rgba(192, 192, 192, 0.02) 100%
+        );
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                #c0c0c0 50%,
+                transparent 100%
+            );
+            border-radius: variables.$radius-lg variables.$radius-lg 0 0;
+        }
+
+        &:hover {
+            border-color: rgba(192, 192, 192, 0.5);
+            background: linear-gradient(
+                135deg,
+                rgba(192, 192, 192, 0.08) 0%,
+                rgba(192, 192, 192, 0.03) 100%
+            );
+            box-shadow: 0 0 25px rgba(192, 192, 192, 0.15);
+        }
+    }
+
+    &:has([class*="bronze"]) {
+        border: 2px solid rgba(205, 127, 50, 0.3);
+        background: linear-gradient(
+            135deg,
+            rgba(205, 127, 50, 0.05) 0%,
+            rgba(205, 127, 50, 0.02) 100%
+        );
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                #cd7f32 50%,
+                transparent 100%
+            );
+            border-radius: variables.$radius-lg variables.$radius-lg 0 0;
+        }
+
+        &:hover {
+            border-color: rgba(205, 127, 50, 0.5);
+            background: linear-gradient(
+                135deg,
+                rgba(205, 127, 50, 0.08) 0%,
+                rgba(205, 127, 50, 0.03) 100%
+            );
+            box-shadow: 0 0 25px rgba(205, 127, 50, 0.15);
+        }
+    }
+}

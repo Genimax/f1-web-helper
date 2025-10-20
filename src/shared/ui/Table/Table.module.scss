@@ -37,6 +37,112 @@
     }
 }
 
+// Специальные стили для топ-3 позиций
+.goldRow {
+    background: linear-gradient(
+        135deg,
+        rgba(255, 215, 0, 0.1) 0%,
+        rgba(255, 215, 0, 0.05) 100%
+    );
+    border-left: 4px solid #ffd700;
+    position: relative;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(
+            90deg,
+            transparent 0%,
+            #ffd700 50%,
+            transparent 100%
+        );
+    }
+
+    &:hover {
+        background: linear-gradient(
+            135deg,
+            rgba(255, 215, 0, 0.15) 0%,
+            rgba(255, 215, 0, 0.08) 100%
+        );
+        transform: translateX(6px);
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+    }
+}
+
+.silverRow {
+    background: linear-gradient(
+        135deg,
+        rgba(192, 192, 192, 0.1) 0%,
+        rgba(192, 192, 192, 0.05) 100%
+    );
+    border-left: 4px solid #c0c0c0;
+    position: relative;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(
+            90deg,
+            transparent 0%,
+            #c0c0c0 50%,
+            transparent 100%
+        );
+    }
+
+    &:hover {
+        background: linear-gradient(
+            135deg,
+            rgba(192, 192, 192, 0.15) 0%,
+            rgba(192, 192, 192, 0.08) 100%
+        );
+        transform: translateX(6px);
+        box-shadow: 0 0 20px rgba(192, 192, 192, 0.2);
+    }
+}
+
+.bronzeRow {
+    background: linear-gradient(
+        135deg,
+        rgba(205, 127, 50, 0.1) 0%,
+        rgba(205, 127, 50, 0.05) 100%
+    );
+    border-left: 4px solid #cd7f32;
+    position: relative;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(
+            90deg,
+            transparent 0%,
+            #cd7f32 50%,
+            transparent 100%
+        );
+    }
+
+    &:hover {
+        background: linear-gradient(
+            135deg,
+            rgba(205, 127, 50, 0.15) 0%,
+            rgba(205, 127, 50, 0.08) 100%
+        );
+        transform: translateX(6px);
+        box-shadow: 0 0 20px rgba(205, 127, 50, 0.2);
+    }
+}
+
 .tableHeaderCell,
 .tableCell {
     padding: variables.$spacing-4;

@@ -1,5 +1,6 @@
 import { F1DriverChampionshipEntry } from "@/shared/api/types/f1Api";
 import { Badge, MobileCard } from "@/shared/ui";
+import { getPositionVariant } from "@/shared/lib";
 import styles from "./DriverMobileCard.module.scss";
 
 interface DriverMobileCardProps {
@@ -11,13 +12,7 @@ export const DriverMobileCard = ({ driver }: DriverMobileCardProps) => {
         <MobileCard className={styles.driverCard}>
             <div className={styles.cardHeader}>
                 <div className={styles.position}>
-                    <Badge
-                        variant={
-                            driver.position && driver.position <= 3
-                                ? "top"
-                                : "default"
-                        }
-                    >
+                    <Badge variant={getPositionVariant(driver.position)}>
                         {driver.position || "-"}
                     </Badge>
                 </div>

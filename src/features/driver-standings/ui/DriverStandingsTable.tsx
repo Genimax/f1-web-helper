@@ -3,6 +3,7 @@ import { Badge } from "@/shared/ui";
 import { F1DriverChampionshipEntry } from "@/shared/api/types/f1Api";
 import { useF1Data } from "@/shared/lib/f1/useF1Data";
 import { useIsMobile } from "@/shared/lib/hooks/useMediaQuery";
+import { getPositionVariant } from "@/shared/lib";
 import { DriverMobileCard } from "./DriverMobileCard";
 import styles from "./DriverStandingsTable.module.scss";
 
@@ -41,13 +42,7 @@ export const DriverStandingsTable = () => {
         switch (column.key) {
             case "position":
                 return (
-                    <Badge
-                        variant={
-                            row.position && row.position <= 3
-                                ? "top"
-                                : "default"
-                        }
-                    >
+                    <Badge variant={getPositionVariant(row.position)}>
                         {row.position || "-"}
                     </Badge>
                 );

@@ -3,6 +3,7 @@ import { Badge } from "@/shared/ui";
 import { F1ConstructorChampionshipEntry } from "@/shared/api/types/f1Api";
 import { useF1Data } from "@/shared/lib/f1/useF1Data";
 import { useIsMobile } from "@/shared/lib/hooks/useMediaQuery";
+import { getPositionVariant } from "@/shared/lib";
 import { TeamMobileCard } from "./TeamMobileCard";
 import styles from "./TeamStandingsTable.module.scss";
 
@@ -40,13 +41,7 @@ export const TeamStandingsTable = () => {
         switch (column.key) {
             case "position":
                 return (
-                    <Badge
-                        variant={
-                            row.position && row.position <= 3
-                                ? "top"
-                                : "default"
-                        }
-                    >
+                    <Badge variant={getPositionVariant(row.position)}>
                         {row.position || "-"}
                     </Badge>
                 );

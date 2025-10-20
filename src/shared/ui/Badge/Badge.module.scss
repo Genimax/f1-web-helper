@@ -14,16 +14,142 @@
     }
 
     &.top {
-        background: linear-gradient(135deg, variables.$f1-gold 0%, #ffed4e 100%);
+        background: linear-gradient(
+            135deg,
+            variables.$f1-gold 0%,
+            #ffed4e 100%
+        );
         color: #1a1a1a;
         box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
         border-color: variables.$f1-gold;
     }
 
     &.accent {
-        background: linear-gradient(135deg, variables.$f1-red 0%, variables.$f1-red-dark 100%);
+        background: linear-gradient(
+            135deg,
+            variables.$f1-red 0%,
+            variables.$f1-red-dark 100%
+        );
         color: white;
         box-shadow: variables.$glow-red;
+    }
+
+    &.gold {
+        background: linear-gradient(
+            135deg,
+            #ffd700 0%,
+            #ffed4e 50%,
+            #ffd700 100%
+        );
+        color: #1a1a1a;
+        box-shadow: 0 0 25px rgba(255, 215, 0, 0.5),
+            0 0 50px rgba(255, 215, 0, 0.2);
+        border: 2px solid #ffd700;
+        position: relative;
+        overflow: hidden;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.3) 50%,
+                transparent 70%
+            );
+            animation: shimmer 2s infinite;
+        }
+
+        &::after {
+            content: "👑";
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            font-size: 12px;
+            animation: bounce 1s infinite;
+        }
+    }
+
+    &.silver {
+        background: linear-gradient(
+            135deg,
+            #c0c0c0 0%,
+            #e8e8e8 50%,
+            #c0c0c0 100%
+        );
+        color: #2a2a2a;
+        box-shadow: 0 0 20px rgba(192, 192, 192, 0.4),
+            0 0 40px rgba(192, 192, 192, 0.2);
+        border: 2px solid #c0c0c0;
+        position: relative;
+        overflow: hidden;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.4) 50%,
+                transparent 70%
+            );
+            animation: shimmer 2.5s infinite;
+        }
+
+        &::after {
+            content: "🥈";
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            font-size: 10px;
+        }
+    }
+
+    &.bronze {
+        background: linear-gradient(
+            135deg,
+            #cd7f32 0%,
+            #daa520 50%,
+            #cd7f32 100%
+        );
+        color: #ffffff;
+        box-shadow: 0 0 15px rgba(205, 127, 50, 0.4),
+            0 0 30px rgba(205, 127, 50, 0.2);
+        border: 2px solid #cd7f32;
+        position: relative;
+        overflow: hidden;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.2) 50%,
+                transparent 70%
+            );
+            animation: shimmer 3s infinite;
+        }
+
+        &::after {
+            content: "🥉";
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            font-size: 10px;
+        }
     }
 
     &.small {
@@ -36,5 +162,31 @@
         width: 32px;
         height: 32px;
         font-size: variables.$font-size-sm;
+    }
+}
+
+// Анимации для медальных эффектов
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+    100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+}
+
+@keyframes bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-3px);
+    }
+    60% {
+        transform: translateY(-2px);
     }
 }
