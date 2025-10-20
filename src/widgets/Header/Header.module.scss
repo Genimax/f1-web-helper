@@ -1,5 +1,5 @@
-@import "../../shared/styles/variables";
-@import "../../shared/styles/mixins";
+@use "../../shared/styles/variables";
+@use "../../shared/styles/mixins";
 
 .header {
     position: relative;
@@ -33,12 +33,12 @@
 }
 
 .container {
-    max-width: $breakpoint-xl;
+    max-width: variables.$breakpoint-xl;
     margin: 0 auto;
-    padding: 0 $spacing-4;
+    padding: 0 variables.$spacing-4;
 
-    @include desktop {
-        padding: 0 $spacing-6;
+    @include mixins.desktop {
+        padding: 0 variables.$spacing-6;
     }
 }
 
@@ -47,15 +47,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: $spacing-8 0;
+    padding: variables.$spacing-8 0;
     flex-wrap: wrap;
-    gap: $spacing-6;
+    gap: variables.$spacing-6;
 }
 
 .logo {
     display: flex;
     align-items: center;
-    gap: $spacing-4;
+    gap: variables.$spacing-4;
 }
 
 .logoIcon {
@@ -64,11 +64,15 @@
 }
 
 .logoText h1 {
-    font-size: $font-size-4xl;
-    font-weight: $font-weight-medium;
+    font-size: variables.$font-size-4xl;
+    font-weight: variables.$font-weight-bold;
     text-decoration: wavy;
     margin: 0;
-    background: linear-gradient(135deg, $f1-red 0%, $f1-orange 100%);
+    background: linear-gradient(
+        135deg,
+        variables.$f1-red 0%,
+        variables.$f1-orange 100%
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -76,21 +80,21 @@
 }
 
 .logoText p {
-    font-size: $font-size-lg;
+    font-size: variables.$font-size-lg;
     color: var(--text-secondary);
     margin: 0;
-    font-weight: $font-weight-medium;
+    font-weight: variables.$font-weight-medium;
 }
 
 .headerActions {
     display: flex;
     align-items: center;
-    gap: $spacing-6;
+    gap: variables.$spacing-6;
 }
 
 .headerStats {
     display: flex;
-    gap: $spacing-8;
+    gap: variables.$spacing-8;
 }
 
 .stat {
@@ -99,34 +103,34 @@
 
 .statNumber {
     display: block;
-    font-size: $font-size-2xl;
-    font-weight: $font-weight-bold;
+    font-size: variables.$font-size-2xl;
+    font-weight: variables.$font-weight-bold;
     color: var(--text-accent);
     line-height: 1;
-    margin-bottom: $spacing-1;
+    margin-bottom: variables.$spacing-1;
 }
 
 .statLabel {
-    font-size: $font-size-sm;
+    font-size: variables.$font-size-sm;
     color: var(--text-muted);
-    font-weight: $font-weight-medium;
+    font-weight: variables.$font-weight-medium;
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
 
-@include mobile {
+@include mixins.mobile {
     .headerContent {
         flex-direction: column;
         text-align: center;
-        padding: $spacing-6 0;
+        padding: variables.$spacing-6 0;
     }
 
     .headerActions {
         flex-direction: column;
-        gap: $spacing-4;
+        gap: variables.$spacing-4;
     }
 
     .headerStats {
-        gap: $spacing-6;
+        gap: variables.$spacing-6;
     }
 }

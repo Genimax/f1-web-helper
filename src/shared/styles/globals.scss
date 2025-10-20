@@ -1,5 +1,6 @@
-@import "./variables";
-@import "./mixins";
+@use "sass:color";
+@use "variables";
+@use "mixins";
 
 // Formula 1 Display Font Face
 @font-face {
@@ -36,7 +37,7 @@
 }
 
 html {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1.5;
     -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
@@ -46,50 +47,51 @@ html {
 }
 
 body {
-    font-family: $font-family-primary;
-    font-size: $font-size-base;
-    font-weight: $font-weight-normal;
+    font-family: variables.$font-family-primary;
+    font-size: variables.$font-size-base;
+    font-weight: variables.$font-weight-normal;
     line-height: 1.6;
-    color: $text-primary;
-    background: $bg-primary;
-    transition: color $transition-normal, background-color $transition-normal;
+    color: variables.$text-primary;
+    background: variables.$bg-primary;
+    transition: color variables.$transition-normal,
+        background-color variables.$transition-normal;
     overflow-x: hidden;
 }
 
 // Dark theme (default)
 :root {
-    --bg-primary: #{$bg-primary};
-    --bg-secondary: #{$bg-secondary};
-    --bg-tertiary: #{$bg-tertiary};
-    --bg-card: #{$bg-card};
-    --bg-hover: #{$bg-hover};
+    --bg-primary: #{variables.$bg-primary};
+    --bg-secondary: #{variables.$bg-secondary};
+    --bg-tertiary: #{variables.$bg-tertiary};
+    --bg-card: #{variables.$bg-card};
+    --bg-hover: #{variables.$bg-hover};
 
-    --text-primary: #{$text-primary};
-    --text-secondary: #{$text-secondary};
-    --text-muted: #{$text-muted};
-    --text-accent: #{$text-accent};
+    --text-primary: #{variables.$text-primary};
+    --text-secondary: #{variables.$text-secondary};
+    --text-muted: #{variables.$text-muted};
+    --text-accent: #{variables.$text-accent};
 
-    --border-primary: #{$border-primary};
-    --border-secondary: #{$border-secondary};
-    --border-accent: #{$border-accent};
+    --border-primary: #{variables.$border-primary};
+    --border-secondary: #{variables.$border-secondary};
+    --border-accent: #{variables.$border-accent};
 }
 
 // Light theme
 [data-theme="light"] {
-    --bg-primary: #{$bg-primary-light};
-    --bg-secondary: #{$bg-secondary-light};
-    --bg-tertiary: #{$bg-tertiary-light};
-    --bg-card: #{$bg-card-light};
-    --bg-hover: #{$bg-hover-light};
+    --bg-primary: #{variables.$bg-primary-light};
+    --bg-secondary: #{variables.$bg-secondary-light};
+    --bg-tertiary: #{variables.$bg-tertiary-light};
+    --bg-card: #{variables.$bg-card-light};
+    --bg-hover: #{variables.$bg-hover-light};
 
-    --text-primary: #{$text-primary-light};
-    --text-secondary: #{$text-secondary-light};
-    --text-muted: #{$text-muted-light};
-    --text-accent: #{$text-accent-light};
+    --text-primary: #{variables.$text-primary-light};
+    --text-secondary: #{variables.$text-secondary-light};
+    --text-muted: #{variables.$text-muted-light};
+    --text-accent: #{variables.$text-accent-light};
 
-    --border-primary: #{$border-primary-light};
-    --border-secondary: #{$border-secondary-light};
-    --border-accent: #{$border-accent-light};
+    --border-primary: #{variables.$border-primary-light};
+    --border-secondary: #{variables.$border-secondary-light};
+    --border-accent: #{variables.$border-accent-light};
 }
 
 // Typography
@@ -99,49 +101,53 @@ h3,
 h4,
 h5,
 h6 {
-    font-weight: $font-weight-bold;
+    font-weight: variables.$font-weight-bold;
     line-height: 1.2;
-    margin-bottom: $spacing-4;
+    margin-bottom: variables.$spacing-4;
     color: var(--text-primary);
     letter-spacing: -0.025em;
 }
 
 h1 {
-    font-size: $font-size-5xl;
-    font-weight: $font-weight-extrabold;
-    background: linear-gradient(135deg, $f1-red 0%, $f1-orange 100%);
+    font-size: variables.$font-size-5xl;
+    font-weight: variables.$font-weight-extrabold;
+    background: linear-gradient(
+        135deg,
+        variables.$f1-red 0%,
+        variables.$f1-orange 100%
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
 h2 {
-    font-size: $font-size-4xl;
-    font-weight: $font-weight-bold;
+    font-size: variables.$font-size-4xl;
+    font-weight: variables.$font-weight-bold;
 }
 
 h3 {
-    font-size: $font-size-3xl;
-    font-weight: $font-weight-semibold;
+    font-size: variables.$font-size-3xl;
+    font-weight: variables.$font-weight-semibold;
 }
 
 h4 {
-    font-size: $font-size-2xl;
-    font-weight: $font-weight-semibold;
+    font-size: variables.$font-size-2xl;
+    font-weight: variables.$font-weight-semibold;
 }
 
 h5 {
-    font-size: $font-size-xl;
-    font-weight: $font-weight-medium;
+    font-size: variables.$font-size-xl;
+    font-weight: variables.$font-weight-medium;
 }
 
 h6 {
-    font-size: $font-size-lg;
-    font-weight: $font-weight-medium;
+    font-size: variables.$font-size-lg;
+    font-weight: variables.$font-weight-medium;
 }
 
 p {
-    margin-bottom: $spacing-4;
+    margin-bottom: variables.$spacing-4;
     color: var(--text-secondary);
     line-height: 1.7;
 }
@@ -149,11 +155,11 @@ p {
 a {
     color: var(--text-accent);
     text-decoration: none;
-    transition: color $transition-fast;
+    transition: color variables.$transition-fast;
     position: relative;
 
     &:hover {
-        color: lighten($f1-red, 10%);
+        color: color.adjust(variables.$f1-red, $lightness: 10%);
     }
 
     &::after {
@@ -164,7 +170,7 @@ a {
         width: 0;
         height: 2px;
         background: var(--text-accent);
-        transition: width $transition-fast;
+        transition: width variables.$transition-fast;
     }
 
     &:hover::after {
@@ -175,12 +181,12 @@ a {
 // Lists
 ul,
 ol {
-    margin-bottom: $spacing-4;
-    padding-left: $spacing-6;
+    margin-bottom: variables.$spacing-4;
+    padding-left: variables.$spacing-6;
 }
 
 li {
-    margin-bottom: $spacing-2;
+    margin-bottom: variables.$spacing-2;
     color: var(--text-secondary);
 }
 
@@ -198,11 +204,11 @@ select {
     font-family: inherit;
     font-size: inherit;
     border: 1px solid var(--border-primary);
-    border-radius: $radius-lg;
-    padding: $spacing-3 $spacing-4;
+    border-radius: variables.$radius-lg;
+    padding: variables.$spacing-3 variables.$spacing-4;
     background: var(--bg-card);
     color: var(--text-primary);
-    transition: all $transition-fast;
+    transition: all variables.$transition-fast;
 
     &:focus {
         outline: none;
@@ -221,7 +227,7 @@ button {
     cursor: pointer;
     border: none;
     background: none;
-    transition: all $transition-fast;
+    transition: all variables.$transition-fast;
 }
 
 // Utilities
@@ -238,12 +244,12 @@ button {
 }
 
 .container {
-    max-width: $breakpoint-xl;
+    max-width: variables.$breakpoint-xl;
     margin: 0 auto;
-    padding: 0 $spacing-4;
+    padding: 0 variables.$spacing-4;
 
-    @include desktop {
-        padding: 0 $spacing-6;
+    @include mixins.desktop {
+        padding: 0 variables.$spacing-6;
     }
 }
 
@@ -258,7 +264,7 @@ button {
 
 ::-webkit-scrollbar-thumb {
     background: var(--border-secondary);
-    border-radius: $radius-full;
+    border-radius: variables.$radius-full;
 
     &:hover {
         background: var(--text-muted);

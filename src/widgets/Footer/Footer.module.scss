@@ -1,20 +1,20 @@
-@import "../../shared/styles/variables";
-@import "../../shared/styles/mixins";
+@use "../../shared/styles/variables";
+@use "../../shared/styles/mixins";
 
 .footer {
     background: var(--bg-secondary);
     border-top: 1px solid var(--border-primary);
-    padding: $spacing-8 0;
+    padding: variables.$spacing-8 0;
     margin-top: auto;
 }
 
 .container {
-    max-width: $breakpoint-xl;
+    max-width: variables.$breakpoint-xl;
     margin: 0 auto;
-    padding: 0 $spacing-4;
+    padding: 0 variables.$spacing-4;
 
-    @include desktop {
-        padding: 0 $spacing-6;
+    @include mixins.desktop {
+        padding: 0 variables.$spacing-6;
     }
 }
 
@@ -23,32 +23,32 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: $spacing-4;
+    gap: variables.$spacing-4;
 }
 
 .footerInfo p {
-    margin: $spacing-1 0;
-    font-size: $font-size-sm;
+    margin: variables.$spacing-1 0;
+    font-size: variables.$font-size-sm;
     color: var(--text-muted);
 }
 
 .footerLinks {
     display: flex;
-    gap: $spacing-6;
+    gap: variables.$spacing-6;
 }
 
 .footerLinks a {
     color: var(--text-muted);
-    font-weight: $font-weight-medium;
-    font-size: $font-size-sm;
-    transition: color $transition-fast;
+    font-weight: variables.$font-weight-medium;
+    font-size: variables.$font-size-sm;
+    transition: color variables.$transition-fast;
 
     &:hover {
         color: var(--text-accent);
     }
 }
 
-@include mobile {
+@include mixins.mobile {
     .footerContent {
         flex-direction: column;
         text-align: center;

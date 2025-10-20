@@ -11,7 +11,7 @@ export const Header = () => {
                         <div className={styles.logoIcon}>🏎️</div>
                         <div className={styles.logoText}>
                             <h1>F1 Web Helper</h1>
-                            <p>Formula 1 Information Portal</p>
+                            <p>Fans' Formula 1 Information Portal</p>
                         </div>
                     </div>
 

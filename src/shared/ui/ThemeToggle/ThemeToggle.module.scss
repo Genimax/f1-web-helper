@@ -1,14 +1,14 @@
-@import "../../styles/variables";
-@import "../../styles/mixins";
+@use "../../styles/variables";
+@use "../../styles/mixins";
 
 .themeToggle {
-    @include flex-center;
+    @include mixins.flex-center;
     width: 48px;
     height: 48px;
-    border-radius: $radius-full;
+    border-radius: variables.$radius-full;
     background: var(--bg-card);
     border: 1px solid var(--border-primary);
-    transition: all $transition-normal;
+    transition: all variables.$transition-normal;
     cursor: pointer;
 
     &:hover {
@@ -20,7 +20,7 @@
 
 .themeIcon {
     font-size: 1.5rem;
-    transition: transform $transition-bounce;
+    transition: transform variables.$transition-bounce;
 }
 
 .themeToggle:hover .themeIcon {

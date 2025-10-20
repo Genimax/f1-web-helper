@@ -7,7 +7,7 @@ export const Footer = () => {
                 <div className={styles.footerContent}>
                     <div className={styles.footerInfo}>
                         <p>
-                            Data provided by{" "}
+                            Данные предоставлены сервисом:{" "}
                             <a
                                 href="https://f1api.dev/api"
                                 target="_blank"
@@ -16,22 +16,15 @@ export const Footer = () => {
                                 F1 API
                             </a>
                         </p>
-                        <p>© 2024 F1 Web Helper. All rights reserved.</p>
+                        {/* <p>© 2025 F1 Web Helper.</p> */}
                     </div>
                     <div className={styles.footerLinks}>
                         <a
-                            href="https://www.formula1.com"
+                            href="https://github.com/Genimax"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            Formula 1 Official
-                        </a>
-                        <a
-                            href="https://f1api.dev/api"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            F1 API Documentation
+                            Разработка: Genimax
                         </a>
                     </div>
                 </div>

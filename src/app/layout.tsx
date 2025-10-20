@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { StoreProvider } from "@/shared/lib/store/StoreProvider";
 import "./globals.scss";
@@ -28,7 +28,11 @@ export const metadata: Metadata = {
         "schedule",
     ],
     authors: [{ name: "F1 Web Helper" }],
-    viewport: "width=device-width, initial-scale=1",
+};
+
+export const viewport: Viewport = {
+    width: "device-width",
+    initialScale: 1,
 };
 
 export default function RootLayout({

@@ -1,11 +1,11 @@
-@import "../../styles/variables";
-@import "../../styles/mixins";
+@use "../../styles/variables";
+@use "../../styles/mixins";
 
 .badge {
-    @include flex-center;
-    border-radius: $radius-full;
-    font-weight: $font-weight-bold;
-    transition: all $transition-fast;
+    @include mixins.flex-center;
+    border-radius: variables.$radius-full;
+    font-weight: variables.$font-weight-bold;
+    transition: all variables.$transition-fast;
 
     &.default {
         background: var(--bg-hover);
@@ -14,27 +14,27 @@
     }
 
     &.top {
-        background: linear-gradient(135deg, $f1-gold 0%, #ffed4e 100%);
+        background: linear-gradient(135deg, variables.$f1-gold 0%, #ffed4e 100%);
         color: #1a1a1a;
         box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-        border-color: $f1-gold;
+        border-color: variables.$f1-gold;
     }
 
     &.accent {
-        background: linear-gradient(135deg, $f1-red 0%, $f1-red-dark 100%);
+        background: linear-gradient(135deg, variables.$f1-red 0%, variables.$f1-red-dark 100%);
         color: white;
-        box-shadow: $glow-red;
+        box-shadow: variables.$glow-red;
     }
 
     &.small {
         width: 24px;
         height: 24px;
-        font-size: $font-size-xs;
+        font-size: variables.$font-size-xs;
     }
 
     &.medium {
         width: 32px;
         height: 32px;
-        font-size: $font-size-sm;
+        font-size: variables.$font-size-sm;
     }
 }

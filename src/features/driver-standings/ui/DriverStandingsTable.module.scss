@@ -1,8 +1,8 @@
-@import "../../../shared/styles/variables";
-@import "../../../shared/styles/mixins";
+@use "../../../shared/styles/variables";
+@use "../../../shared/styles/mixins";
 
 .tableSection {
-    padding: $spacing-8;
+    padding: variables.$spacing-8;
     border-bottom: 1px solid var(--border-primary);
 
     &:last-child {
@@ -14,25 +14,25 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: $spacing-6;
+    margin-bottom: variables.$spacing-6;
     flex-wrap: wrap;
-    gap: $spacing-4;
+    gap: variables.$spacing-4;
 }
 
 .tableHeader h3 {
-    font-size: $font-size-2xl;
+    font-size: variables.$font-size-2xl;
     color: var(--text-primary);
     margin: 0;
-    font-weight: $font-weight-semibold;
+    font-weight: variables.$font-weight-semibold;
 }
 
 .tableMeta {
     display: flex;
     align-items: center;
-    gap: $spacing-2;
+    gap: variables.$spacing-2;
     color: var(--text-muted);
-    font-size: $font-size-sm;
-    font-weight: $font-weight-medium;
+    font-size: variables.$font-size-sm;
+    font-weight: variables.$font-weight-medium;
 }
 
 .divider {
@@ -42,7 +42,7 @@
 .driverInfo {
     display: flex;
     align-items: center;
-    gap: $spacing-3;
+    gap: variables.$spacing-3;
 }
 
 .driverFlag {
@@ -50,18 +50,18 @@
 }
 
 .driverName {
-    font-weight: $font-weight-semibold;
+    font-weight: variables.$font-weight-semibold;
     color: var(--text-primary);
-    font-size: $font-size-base;
+    font-size: variables.$font-size-base;
 }
 
 .points {
-    font-size: $font-size-lg;
-    font-weight: $font-weight-bold;
+    font-size: variables.$font-size-lg;
+    font-weight: variables.$font-weight-bold;
     color: var(--text-accent);
 }
 
 .stat {
-    font-weight: $font-weight-semibold;
+    font-weight: variables.$font-weight-semibold;
     color: var(--text-primary);
 }

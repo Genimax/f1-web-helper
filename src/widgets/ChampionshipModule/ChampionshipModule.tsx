@@ -53,7 +53,7 @@ export const ChampionshipModule = () => {
         <div className={styles.module}>
             <div className={styles.moduleHeader}>
                 <div className={styles.moduleTitle}>
-                    <h2>2024 Championship</h2>
+                    <h2>2025 Championship</h2>
                     <p>Current standings and statistics</p>
                 </div>
 
