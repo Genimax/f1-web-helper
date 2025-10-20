@@ -1,0 +1,73 @@
+@use "../../../shared/styles/variables";
+@use "../../../shared/styles/mixins";
+
+.teamCard {
+    margin-bottom: variables.$spacing-3;
+}
+
+.cardHeader {
+    display: flex;
+    align-items: center;
+    gap: variables.$spacing-3;
+    margin-bottom: variables.$spacing-4;
+}
+
+.position {
+    flex-shrink: 0;
+}
+
+.teamInfo {
+    flex: 1;
+}
+
+.teamName {
+    font-size: variables.$font-size-lg;
+    font-weight: variables.$font-weight-semibold;
+    color: var(--text-primary);
+    margin: 0 0 variables.$spacing-1 0;
+}
+
+.teamCountry {
+    font-size: variables.$font-size-sm;
+    color: var(--text-muted);
+    margin: 0;
+    font-weight: variables.$font-weight-medium;
+}
+
+.cardContent {
+    display: flex;
+    flex-direction: column;
+    gap: variables.$spacing-3;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    gap: variables.$spacing-4;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.statLabel {
+    font-size: variables.$font-size-xs;
+    color: var(--text-muted);
+    font-weight: variables.$font-weight-medium;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: variables.$spacing-1;
+}
+
+.statValue {
+    font-size: variables.$font-size-lg;
+    font-weight: variables.$font-weight-bold;
+    color: var(--text-primary);
+}
+
+.stat:first-child .statValue {
+    color: var(--text-accent);
+}

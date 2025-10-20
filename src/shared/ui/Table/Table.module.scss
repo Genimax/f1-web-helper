@@ -54,23 +54,79 @@
     color: var(--text-secondary);
 }
 
-/* Responsive adjustments */
+/* Mobile Card Layout */
 @include mixins.mobile {
+    .tableHead {
+        display: none; // Скрываем заголовки на мобильных
+    }
+
+    .tableBody {
+        display: flex;
+        flex-direction: column;
+        gap: variables.$spacing-3;
+    }
+
+    .tableRow {
+        display: flex;
+        flex-direction: column;
+        background: var(--bg-card);
+        border: 1px solid var(--border-primary);
+        border-radius: variables.$radius-lg;
+        padding: variables.$spacing-4;
+        gap: variables.$spacing-3;
+        transition: all variables.$transition-fast;
+
+        &:hover {
+            background: var(--bg-hover);
+            transform: translateY(-2px);
+            box-shadow: variables.$shadow-md;
+        }
+    }
+
+    .tableCell {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: variables.$spacing-2 0;
+        border-bottom: 1px solid var(--border-primary);
+        font-size: variables.$font-size-sm;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        // Добавляем лейблы для мобильных
+        &::before {
+            content: attr(data-label);
+            font-weight: variables.$font-weight-medium;
+            color: var(--text-muted);
+            font-size: variables.$font-size-xs;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            min-width: 60px;
+        }
+
+        // Специальные стили для разных типов данных
+        &:has([class*="Badge"]) {
+            align-items: center;
+        }
+
+        &:has([class*="driverInfo"]) {
+            align-items: flex-start;
+        }
+    }
+}
+
+/* Tablet adjustments */
+@include mixins.tablet {
     .tableHead,
     .tableRow {
-        grid-template-columns: 50px 1fr 150px 80px 80px 80px;
-        font-size: variables.$font-size-xs;
+        grid-template-columns: 55px 1fr 180px 90px 90px 90px;
     }
 
     .tableHeaderCell,
     .tableCell {
         padding: variables.$spacing-3 variables.$spacing-2;
-    }
-}
-
-@include mixins.tablet {
-    .tableHead,
-    .tableRow {
-        grid-template-columns: 55px 1fr 180px 90px 90px 90px;
+        font-size: variables.$font-size-sm;
     }
 }

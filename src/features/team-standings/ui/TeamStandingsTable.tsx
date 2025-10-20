@@ -2,10 +2,13 @@ import { Table } from "@/shared/ui";
 import { Badge } from "@/shared/ui";
 import { F1ConstructorChampionshipEntry } from "@/shared/api/types/f1Api";
 import { useF1Data } from "@/shared/lib/f1/useF1Data";
+import { useIsMobile } from "@/shared/lib/hooks/useMediaQuery";
+import { TeamMobileCard } from "./TeamMobileCard";
 import styles from "./TeamStandingsTable.module.scss";
 
 export const TeamStandingsTable = () => {
     const { constructorsChampionship } = useF1Data();
+    const isMobile = useIsMobile();
 
     const columns = [
         {
@@ -128,12 +131,20 @@ export const TeamStandingsTable = () => {
                 </div>
             </div>
 
-            <Table
-                columns={columns}
-                data={constructorsChampionship.data}
-                renderCell={renderCell}
-                className={styles.table}
-            />
+            {isMobile ? (
+                <div className={styles.mobileContainer}>
+                    {constructorsChampionship.data.map((team) => (
+                        <TeamMobileCard key={team.teamId} team={team} />
+                    ))}
+                </div>
+            ) : (
+                <Table
+                    columns={columns}
+                    data={constructorsChampionship.data}
+                    renderCell={renderCell}
+                    className={styles.table}
+                />
+            )}
         </div>
     );
 };

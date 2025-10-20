@@ -79,3 +79,53 @@
 .error {
     color: var(--text-accent);
 }
+
+/* Mobile specific styles */
+@include mixins.mobile {
+    .tableSection {
+        padding: variables.$spacing-4;
+    }
+
+    .tableHeader {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: variables.$spacing-3;
+        margin-bottom: variables.$spacing-4;
+    }
+
+    .tableHeader h3 {
+        font-size: variables.$font-size-xl;
+    }
+
+    .tableMeta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: variables.$spacing-1;
+    }
+
+    .teamInfo {
+        gap: variables.$spacing-1;
+    }
+
+    .teamName {
+        font-size: variables.$font-size-sm;
+    }
+
+    .teamCountry {
+        font-size: variables.$font-size-xs;
+    }
+
+    .points {
+        font-size: variables.$font-size-base;
+    }
+
+    .wins {
+        font-size: variables.$font-size-sm;
+    }
+
+    .mobileContainer {
+        display: flex;
+        flex-direction: column;
+        gap: variables.$spacing-3;
+    }
+}

@@ -56,6 +56,7 @@ export const Table = <T extends Record<string, any>>({
                                 key={column.key}
                                 className={styles.tableCell}
                                 style={{ textAlign: column.align || "left" }}
+                                data-label={column.title}
                             >
                                 {renderCell
                                     ? renderCell(

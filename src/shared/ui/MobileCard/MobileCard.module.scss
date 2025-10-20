@@ -1,0 +1,16 @@
+@use "../../styles/variables";
+@use "../../styles/mixins";
+
+.mobileCard {
+    background: var(--bg-card);
+    border: 1px solid var(--border-primary);
+    border-radius: variables.$radius-lg;
+    padding: variables.$spacing-4;
+    transition: all variables.$transition-fast;
+
+    &:hover {
+        background: var(--bg-hover);
+        transform: translateY(-2px);
+        box-shadow: variables.$shadow-md;
+    }
+}

@@ -2,10 +2,13 @@ import { Table } from "@/shared/ui";
 import { Badge } from "@/shared/ui";
 import { F1DriverChampionshipEntry } from "@/shared/api/types/f1Api";
 import { useF1Data } from "@/shared/lib/f1/useF1Data";
+import { useIsMobile } from "@/shared/lib/hooks/useMediaQuery";
+import { DriverMobileCard } from "./DriverMobileCard";
 import styles from "./DriverStandingsTable.module.scss";
 
 export const DriverStandingsTable = () => {
     const { driversChampionship } = useF1Data();
+    const isMobile = useIsMobile();
 
     const columns = [
         {
@@ -131,12 +134,23 @@ export const DriverStandingsTable = () => {
                 </div>
             </div>
 
-            <Table
-                columns={columns}
-                data={driversChampionship.data}
-                renderCell={renderCell}
-                className={styles.table}
-            />
+            {isMobile ? (
+                <div className={styles.mobileContainer}>
+                    {driversChampionship.data.map((driver) => (
+                        <DriverMobileCard
+                            key={driver.driverId}
+                            driver={driver}
+                        />
+                    ))}
+                </div>
+            ) : (
+                <Table
+                    columns={columns}
+                    data={driversChampionship.data}
+                    renderCell={renderCell}
+                    className={styles.table}
+                />
+            )}
         </div>
     );
 };
