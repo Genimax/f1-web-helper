@@ -71,7 +71,11 @@
 }
 
 .tabActive {
-    background: linear-gradient(135deg, variables.$f1-red 0%, variables.$f1-red-dark 100%);
+    background: linear-gradient(
+        135deg,
+        variables.$f1-red 0%,
+        variables.$f1-red-dark 100%
+    );
     color: white;
     box-shadow: variables.$glow-red;
     transform: translateY(-1px);

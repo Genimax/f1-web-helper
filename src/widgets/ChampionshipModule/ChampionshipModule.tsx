@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useAppSelector } from "@/shared/lib/store/hooks";
 import { DriverStandingsTable } from "@/features/driver-standings/ui/DriverStandingsTable";
 import { TeamStandingsTable } from "@/features/team-standings/ui/TeamStandingsTable";
@@ -28,6 +29,33 @@ export const ChampionshipModule = () => {
         { id: "schedule" as const, label: "Schedule", icon: "📅" },
         { id: "calculator" as const, label: "Calculator", icon: "🧮" },
     ];
+
+    // Анимации для переключения вкладок
+    const tabVariants = {
+        enter: (direction: number) => ({
+            x: direction > 0 ? 300 : -300,
+            opacity: 0,
+        }),
+        center: {
+            zIndex: 1,
+            x: 0,
+            opacity: 1,
+        },
+        exit: (direction: number) => ({
+            zIndex: 0,
+            x: direction < 0 ? 300 : -300,
+            opacity: 0,
+        }),
+    };
+
+    const tabTransition = {
+        x: { type: "spring", stiffness: 300, damping: 30 },
+        opacity: { duration: 0.2 },
+    } as const;
+
+    const handleTabChange = (newTab: TabType) => {
+        setActiveTab(newTab);
+    };
 
     const renderContent = () => {
         switch (activeTab) {
@@ -74,7 +102,7 @@ export const ChampionshipModule = () => {
                             className={`${styles.tab} ${
                                 activeTab === tab.id ? styles.tabActive : ""
                             }`}
-                            onClick={() => setActiveTab(tab.id)}
+                            onClick={() => handleTabChange(tab.id)}
                         >
                             <span className={styles.tabIcon}>{tab.icon}</span>
                             <span>{tab.label}</span>
@@ -83,7 +111,22 @@ export const ChampionshipModule = () => {
                 </div>
             </div>
 
-            {renderContent()}
+            <div className={styles.contentContainer}>
+                <AnimatePresence mode="popLayout" custom={1}>
+                    <motion.div
+                        key={activeTab}
+                        custom={1}
+                        variants={tabVariants}
+                        initial="enter"
+                        animate="center"
+                        exit="exit"
+                        transition={tabTransition}
+                        className={styles.animatedContent}
+                    >
+                        {renderContent()}
+                    </motion.div>
+                </AnimatePresence>
+            </div>
         </div>
     );
 };

@@ -1,6 +1,8 @@
 import { ThemeToggle } from "@/shared/ui";
 import styles from "./Header.module.scss";
 
+import Image from "next/image";
+
 export const Header = () => {
     return (
         <header className={styles.header}>
@@ -8,7 +10,12 @@ export const Header = () => {
             <div className={styles.container}>
                 <div className={styles.headerContent}>
                     <div className={styles.logo}>
-                        <div className={styles.logoIcon}>🏎️</div>
+                        <Image
+                            src="/logo.svg"
+                            alt="Logo"
+                            width={50}
+                            height={50}
+                        />
                         <div className={styles.logoText}>
                             <h1>F1 Web Helper</h1>
                             <p>Fans' Formula 1 Information Portal</p>
