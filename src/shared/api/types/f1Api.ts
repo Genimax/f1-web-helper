@@ -65,3 +65,108 @@ export interface F1ApiParams {
     limit?: number;
     offset?: number;
 }
+
+// Типы для следующего уикенда
+export interface F1Schedule {
+    race: {
+        date: string;
+        time: string | null;
+    };
+    qualy: {
+        date: string;
+        time: string | null;
+    };
+    fp1: {
+        date: string;
+        time: string | null;
+    };
+    fp2: {
+        date: string;
+        time: string | null;
+    };
+    fp3: {
+        date: string;
+        time: string | null;
+    };
+    sprintQualy: {
+        date: string | null;
+        time: string | null;
+    };
+    sprintRace: {
+        date: string | null;
+        time: string | null;
+    };
+}
+
+export interface F1FastLap {
+    fast_lap: string | null;
+    fast_lap_driver_id: string | null;
+    fast_lap_team_id: string | null;
+}
+
+export interface F1Circuit {
+    circuitId: string;
+    circuitName: string;
+    country: string;
+    city: string;
+    circuitLength: string;
+    lapRecord: string;
+    firstParticipationYear: number;
+    corners: number;
+    fastestLapDriverId: string;
+    fastestLapTeamId: string;
+    fastestLapYear: number;
+    url: string;
+}
+
+export interface F1Winner {
+    driverId: string;
+    name: string;
+    surname: string;
+    country: string;
+    birthday: string;
+    number: number | null;
+    shortName: string;
+    url: string;
+}
+
+export interface F1TeamWinner {
+    teamId: string;
+    teamName: string;
+    country: string;
+    firstAppearance: number;
+    constructorsChampionships: number | null;
+    driversChampionships: number | null;
+    url: string;
+}
+
+export interface F1Race {
+    raceId: string;
+    championshipId: string;
+    raceName: string | null;
+    schedule: F1Schedule;
+    laps: number | null;
+    round: number;
+    url: string | null;
+    fast_lap: F1FastLap;
+    circuit: F1Circuit;
+    winner: F1Winner | null;
+    teamWinner: F1TeamWinner | null;
+}
+
+export interface F1Championship {
+    championshipId: string;
+    championshipName: string;
+    url: string;
+    year: number;
+}
+
+export interface F1NextRaceResponse {
+    api: string;
+    url: string;
+    total: number;
+    season: number;
+    round: number;
+    championship: F1Championship;
+    race: F1Race[];
+}

@@ -1,0 +1,277 @@
+@use "../../../shared/styles/variables.scss";
+@use "../../../shared/styles/mixins.scss";
+
+.countdownTimer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: linear-gradient(
+        135deg,
+        #1a1a1a 0%,
+        #2d2d2d 25%,
+        #1a1a1a 50%,
+        #0a0a0a 100%
+    );
+    border-radius: 20px;
+    box-shadow: 0 0 0 2px #e10600, 0 0 20px rgba(225, 6, 0, 0.3),
+        0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(225, 6, 0, 0.5);
+    min-width: 320px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(225, 6, 0, 0.1),
+            transparent
+        );
+        animation: shimmer 3s infinite;
+    }
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0 0 2px #e10600, 0 0 30px rgba(225, 6, 0, 0.5),
+            0 12px 40px rgba(0, 0, 0, 0.5),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+.nextRaceLabel {
+    font-size: 14px;
+    font-weight: 800;
+    color: #e10600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(225, 6, 0, 0.5);
+    position: relative;
+    z-index: 1;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.timer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: "Formula1 Display", monospace;
+    position: relative;
+    z-index: 1;
+}
+
+.timeUnit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 60px;
+}
+
+.timeValue {
+    font-size: 28px;
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 1;
+    text-shadow: 0 0 10px rgba(225, 6, 0, 0.8), 0 0 20px rgba(225, 6, 0, 0.4),
+        0 2px 4px rgba(0, 0, 0, 0.8);
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 50%, #0a0a0a 100%);
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 2px solid #e10600;
+    box-shadow: 0 0 15px rgba(225, 6, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+    min-width: 52px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(225, 6, 0, 0.2),
+            transparent
+        );
+        animation: numberShimmer 2s infinite;
+    }
+}
+
+@keyframes numberShimmer {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+.timeLabel {
+    font-size: 11px;
+    color: #e10600;
+    margin-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    text-shadow: 0 0 5px rgba(225, 6, 0, 0.5);
+}
+
+.separator {
+    font-size: 24px;
+    font-weight: 900;
+    color: #e10600;
+    text-shadow: 0 0 10px rgba(225, 6, 0, 0.8), 0 0 20px rgba(225, 6, 0, 0.4);
+    transition: opacity 0.1s ease;
+    position: relative;
+    z-index: 1;
+
+    &.blink {
+        opacity: 0.4;
+    }
+}
+
+.raceStatus {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 32px;
+    background: linear-gradient(45deg, #e10600, #ff4444);
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(225, 6, 0, 0.5), 0 4px 16px rgba(0, 0, 0, 0.3);
+    border: 2px solid #ffffff;
+    position: relative;
+    z-index: 1;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(225, 6, 0, 0.5), 0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(225, 6, 0, 0.8), 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+}
+
+.statusText {
+    font-size: 18px;
+    font-weight: 900;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.loading,
+.error {
+    font-size: 16px;
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 1;
+}
+
+.error {
+    color: #ff6b6b;
+    text-shadow: 0 0 10px rgba(255, 107, 107, 0.5), 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+// Темная тема
+:global(.dark) {
+    .countdownTimer {
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .timeValue {
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .raceStatus {
+        background: linear-gradient(45deg, #e74c3c, #c0392b);
+    }
+}
+
+// Адаптивность
+@media (max-width: 768px) {
+    .countdownTimer {
+        min-width: 280px;
+        padding: 14px 16px;
+        gap: 12px;
+    }
+
+    .timeValue {
+        font-size: 24px;
+        padding: 10px 14px;
+        min-width: 48px;
+    }
+
+    .separator {
+        font-size: 20px;
+    }
+
+    .nextRaceLabel {
+        font-size: 12px;
+    }
+
+    .timer {
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .countdownTimer {
+        min-width: 260px;
+        padding: 12px 14px;
+        gap: 10px;
+        flex-direction: column;
+    }
+
+    .timeValue {
+        font-size: 22px;
+        padding: 8px 12px;
+        min-width: 44px;
+    }
+
+    .separator {
+        font-size: 18px;
+    }
+
+    .timer {
+        gap: 8px;
+    }
+
+    .nextRaceLabel {
+        font-size: 11px;
+        margin-bottom: 4px;
+    }
+}

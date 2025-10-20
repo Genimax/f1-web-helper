@@ -1,4 +1,6 @@
-import { ThemeToggle } from "@/shared/ui";
+"use client";
+
+import { ThemeToggle, CountdownTimer } from "@/shared/ui";
 import styles from "./Header.module.scss";
 
 import Image from "next/image";
@@ -23,23 +25,8 @@ export const Header = () => {
                     </div>
 
                     <div className={styles.headerActions}>
+                        <CountdownTimer />
                         <ThemeToggle />
-                        <div className={styles.headerStats}>
-                            <div className={styles.stat}>
-                                <span className={styles.statNumber}>24</span>
-                                <span className={styles.statLabel}>Races</span>
-                            </div>
-                            <div className={styles.stat}>
-                                <span className={styles.statNumber}>20</span>
-                                <span className={styles.statLabel}>
-                                    Drivers
-                                </span>
-                            </div>
-                            <div className={styles.stat}>
-                                <span className={styles.statNumber}>10</span>
-                                <span className={styles.statLabel}>Teams</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

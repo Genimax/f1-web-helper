@@ -1,4 +1,8 @@
-import { F1DriversChampionshipResponse, F1ApiParams } from "./types/f1Api";
+import {
+    F1DriversChampionshipResponse,
+    F1ApiParams,
+    F1NextRaceResponse,
+} from "./types/f1Api";
 
 const BASE_URL = "https://f1api.dev/api";
 
@@ -81,6 +85,13 @@ class F1ApiService {
      */
     async getTeams(params?: F1ApiParams): Promise<any> {
         return this.fetchData("/teams", params);
+    }
+
+    /**
+     * Получает информацию о следующем уикенде
+     */
+    async getNextRace(): Promise<F1NextRaceResponse> {
+        return this.fetchData<F1NextRaceResponse>("/current/next");
     }
 }
 

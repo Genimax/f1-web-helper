@@ -5,6 +5,9 @@ import {
     fetchConstructorsChampionship,
 } from "@/shared/lib/store/slices/f1Slice";
 
+// Экспортируем новый хук для следующего уикенда
+export { useNextRace } from "./useNextRace";
+
 export const useF1Data = () => {
     const dispatch = useAppDispatch();
     const { driversChampionship, constructorsChampionship } = useAppSelector(
