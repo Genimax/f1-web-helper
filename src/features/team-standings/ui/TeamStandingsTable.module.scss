@@ -41,20 +41,20 @@
 
 .teamInfo {
     display: flex;
-    align-items: center;
-    gap: variables.$spacing-3;
-}
-
-.teamColor {
-    width: 16px;
-    height: 16px;
-    border-radius: variables.$radius-full;
-    border: 1px solid var(--border-primary);
+    flex-direction: column;
+    gap: variables.$spacing-1;
 }
 
 .teamName {
+    font-weight: variables.$font-weight-semibold;
+    color: var(--text-primary);
+    font-size: variables.$font-size-base;
+}
+
+.teamCountry {
+    font-size: variables.$font-size-sm;
+    color: var(--text-muted);
     font-weight: variables.$font-weight-medium;
-    color: var(--text-secondary);
 }
 
 .points {
@@ -63,7 +63,19 @@
     color: var(--text-accent);
 }
 
-.stat {
+.wins {
     font-weight: variables.$font-weight-semibold;
     color: var(--text-primary);
+}
+
+.loading,
+.error,
+.noData {
+    padding: variables.$spacing-8;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+.error {
+    color: var(--text-accent);
 }

@@ -1,15 +1,12 @@
 import { Table } from "@/shared/ui";
 import { Badge } from "@/shared/ui";
-import { Driver } from "@/entities/driver/model/types";
+import { F1DriverChampionshipEntry } from "@/shared/api/types/f1Api";
+import { useF1Data } from "@/shared/lib/f1/useF1Data";
 import styles from "./DriverStandingsTable.module.scss";
 
-interface DriverStandingsTableProps {
-    drivers: Driver[];
-}
+export const DriverStandingsTable = () => {
+    const { driversChampionship } = useF1Data();
 
-export const DriverStandingsTable = ({
-    drivers,
-}: DriverStandingsTableProps) => {
     const columns = [
         {
             key: "position",
@@ -31,29 +28,42 @@ export const DriverStandingsTable = ({
             width: "100px",
             align: "center" as const,
         },
-        {
-            key: "podiums",
-            title: "Podiums",
-            width: "100px",
-            align: "center" as const,
-        },
     ];
 
-    const renderCell = (value: any, column: any, row: Driver) => {
+    const renderCell = (
+        value: any,
+        column: any,
+        row: F1DriverChampionshipEntry
+    ) => {
         switch (column.key) {
             case "position":
                 return (
-                    <Badge variant={row.position <= 3 ? "top" : "default"}>
-                        {row.position}
+                    <Badge
+                        variant={
+                            row.position && row.position <= 3
+                                ? "top"
+                                : "default"
+                        }
+                    >
+                        {row.position || "-"}
                     </Badge>
                 );
 
             case "driver":
                 return (
                     <div className={styles.driverInfo}>
-                        <span className={styles.driverFlag}>{row.flag}</span>
-                        <span className={styles.driverName}>{row.name}</span>
+                        <span className={styles.driverName}>
+                            {row.driver.name} {row.driver.surname}
+                        </span>
+                        <span className={styles.driverShortName}>
+                            {row.driver.shortName}
+                        </span>
                     </div>
+                );
+
+            case "team":
+                return (
+                    <span className={styles.teamName}>{row.team.teamName}</span>
                 );
 
             case "points":
@@ -64,30 +74,66 @@ export const DriverStandingsTable = ({
                 );
 
             case "wins":
-            case "podiums":
-                return <span className={styles.stat}>{value}</span>;
+                return <span className={styles.wins}>{row.wins}</span>;
 
             default:
                 return value;
         }
     };
 
+    if (driversChampionship.loading) {
+        return (
+            <div className={styles.tableSection}>
+                <div className={styles.loading}>
+                    <p>Loading drivers championship data...</p>
+                </div>
+            </div>
+        );
+    }
+
+    if (driversChampionship.error) {
+        return (
+            <div className={styles.tableSection}>
+                <div className={styles.error}>
+                    <p>Error loading data: {driversChampionship.error}</p>
+                </div>
+            </div>
+        );
+    }
+
+    if (!driversChampionship.data || driversChampionship.data.length === 0) {
+        return (
+            <div className={styles.tableSection}>
+                <div className={styles.noData}>
+                    <p>No drivers championship data available</p>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className={styles.tableSection}>
             <div className={styles.tableHeader}>
                 <h3>Driver Standings</h3>
                 <div className={styles.tableMeta}>
-                    <span className={styles.season}>2024 Season</span>
+                    <span className={styles.season}>
+                        {driversChampionship.season} Season
+                    </span>
                     <span className={styles.divider}>•</span>
                     <span className={styles.updated}>
-                        Updated: Nov 26, 2024
+                        Updated:{" "}
+                        {driversChampionship.lastUpdated
+                            ? new Date(
+                                  driversChampionship.lastUpdated
+                              ).toLocaleDateString()
+                            : "Unknown"}
                     </span>
                 </div>
             </div>
 
-            <Table<Driver>
+            <Table
                 columns={columns}
-                data={drivers}
+                data={driversChampionship.data}
                 renderCell={renderCell}
                 className={styles.table}
             />

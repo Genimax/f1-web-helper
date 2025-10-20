@@ -7,7 +7,7 @@ export const Footer = () => {
                 <div className={styles.footerContent}>
                     <div className={styles.footerInfo}>
                         <p>
-                            Данные предоставлены сервисом:{" "}
+                            Data provided by the service:{" "}
                             <a
                                 href="https://f1api.dev/api"
                                 target="_blank"
@@ -16,7 +16,6 @@ export const Footer = () => {
                                 F1 API
                             </a>
                         </p>
-                        {/* <p>© 2025 F1 Web Helper.</p> */}
                     </div>
                     <div className={styles.footerLinks}>
                         <a
@@ -24,7 +23,7 @@ export const Footer = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            Разработка: Genimax
+                            Developed by Genimax
                         </a>
                     </div>
                 </div>

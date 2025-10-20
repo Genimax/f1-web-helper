@@ -1,16 +1,26 @@
 "use client";
 
 import { useState } from "react";
+import { useAppSelector } from "@/shared/lib/store/hooks";
 import { DriverStandingsTable } from "@/features/driver-standings/ui/DriverStandingsTable";
 import { TeamStandingsTable } from "@/features/team-standings/ui/TeamStandingsTable";
-import { mockDrivers } from "@/entities/driver/model/mockData";
-import { mockTeams } from "@/entities/team/model/mockData";
 import styles from "./ChampionshipModule.module.scss";
 
 type TabType = "drivers" | "teams" | "schedule" | "calculator";
 
 export const ChampionshipModule = () => {
     const [activeTab, setActiveTab] = useState<TabType>("drivers");
+
+    // Получаем сезон из Redux store
+    const { driversChampionship, constructorsChampionship } = useAppSelector(
+        (state) => state.f1
+    );
+
+    // Определяем текущий сезон (приоритет у drivers, если нет - у constructors)
+    const currentSeason =
+        driversChampionship.season ||
+        constructorsChampionship.season ||
+        new Date().getFullYear();
 
     const tabs = [
         { id: "drivers" as const, label: "Drivers", icon: "🏆" },
@@ -22,9 +32,9 @@ export const ChampionshipModule = () => {
     const renderContent = () => {
         switch (activeTab) {
             case "drivers":
-                return <DriverStandingsTable drivers={mockDrivers} />;
+                return <DriverStandingsTable />;
             case "teams":
-                return <TeamStandingsTable teams={mockTeams} />;
+                return <TeamStandingsTable />;
             case "schedule":
                 return (
                     <div className={styles.placeholder}>
@@ -53,7 +63,7 @@ export const ChampionshipModule = () => {
         <div className={styles.module}>
             <div className={styles.moduleHeader}>
                 <div className={styles.moduleTitle}>
-                    <h2>2025 Championship</h2>
+                    <h2>{currentSeason} Championship</h2>
                     <p>Current standings and statistics</p>
                 </div>
 

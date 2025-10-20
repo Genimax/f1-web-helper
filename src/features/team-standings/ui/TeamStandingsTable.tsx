@@ -1,13 +1,12 @@
 import { Table } from "@/shared/ui";
 import { Badge } from "@/shared/ui";
-import { Team } from "@/entities/team/model/types";
+import { F1ConstructorChampionshipEntry } from "@/shared/api/types/f1Api";
+import { useF1Data } from "@/shared/lib/f1/useF1Data";
 import styles from "./TeamStandingsTable.module.scss";
 
-interface TeamStandingsTableProps {
-    teams: Team[];
-}
+export const TeamStandingsTable = () => {
+    const { constructorsChampionship } = useF1Data();
 
-export const TeamStandingsTable = ({ teams }: TeamStandingsTableProps) => {
     const columns = [
         {
             key: "position",
@@ -28,31 +27,36 @@ export const TeamStandingsTable = ({ teams }: TeamStandingsTableProps) => {
             width: "100px",
             align: "center" as const,
         },
-        {
-            key: "podiums",
-            title: "Podiums",
-            width: "100px",
-            align: "center" as const,
-        },
     ];
 
-    const renderCell = (value: any, column: any, row: Team) => {
+    const renderCell = (
+        value: any,
+        column: any,
+        row: F1ConstructorChampionshipEntry
+    ) => {
         switch (column.key) {
             case "position":
                 return (
-                    <Badge variant={row.position <= 3 ? "top" : "default"}>
-                        {row.position}
+                    <Badge
+                        variant={
+                            row.position && row.position <= 3
+                                ? "top"
+                                : "default"
+                        }
+                    >
+                        {row.position || "-"}
                     </Badge>
                 );
 
             case "team":
                 return (
                     <div className={styles.teamInfo}>
-                        <div
-                            className={styles.teamColor}
-                            style={{ backgroundColor: row.color }}
-                        ></div>
-                        <span className={styles.teamName}>{row.name}</span>
+                        <span className={styles.teamName}>
+                            {row.team.teamName}
+                        </span>
+                        <span className={styles.teamCountry}>
+                            {row.team.country}
+                        </span>
                     </div>
                 );
 
@@ -64,30 +68,69 @@ export const TeamStandingsTable = ({ teams }: TeamStandingsTableProps) => {
                 );
 
             case "wins":
-            case "podiums":
-                return <span className={styles.stat}>{value}</span>;
+                return <span className={styles.wins}>{row.wins}</span>;
 
             default:
                 return value;
         }
     };
 
+    if (constructorsChampionship.loading) {
+        return (
+            <div className={styles.tableSection}>
+                <div className={styles.loading}>
+                    <p>Loading constructors championship data...</p>
+                </div>
+            </div>
+        );
+    }
+
+    if (constructorsChampionship.error) {
+        return (
+            <div className={styles.tableSection}>
+                <div className={styles.error}>
+                    <p>Error loading data: {constructorsChampionship.error}</p>
+                </div>
+            </div>
+        );
+    }
+
+    if (
+        !constructorsChampionship.data ||
+        constructorsChampionship.data.length === 0
+    ) {
+        return (
+            <div className={styles.tableSection}>
+                <div className={styles.noData}>
+                    <p>No constructors championship data available</p>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className={styles.tableSection}>
             <div className={styles.tableHeader}>
                 <h3>Constructor Standings</h3>
                 <div className={styles.tableMeta}>
-                    <span className={styles.season}>2024 Season</span>
+                    <span className={styles.season}>
+                        {constructorsChampionship.season} Season
+                    </span>
                     <span className={styles.divider}>•</span>
                     <span className={styles.updated}>
-                        Updated: Nov 26, 2024
+                        Updated:{" "}
+                        {constructorsChampionship.lastUpdated
+                            ? new Date(
+                                  constructorsChampionship.lastUpdated
+                              ).toLocaleDateString()
+                            : "Unknown"}
                     </span>
                 </div>
             </div>
 
             <Table
                 columns={columns}
-                data={teams}
+                data={constructorsChampionship.data}
                 renderCell={renderCell}
                 className={styles.table}
             />
