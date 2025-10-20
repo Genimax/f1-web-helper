@@ -27,7 +27,7 @@ export const metadata: Metadata = {
         "standings",
         "schedule",
     ],
-    authors: [{ name: "F1 Web Helper" }],
+    authors: [{ name: "Max Kolosov", url: "https://github.com/Genimax" }],
 };
 
 export const viewport: Viewport = {
