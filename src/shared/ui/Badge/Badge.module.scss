@@ -1,11 +1,51 @@
 @use "../../styles/variables";
 @use "../../styles/mixins";
 
+.badgeContainer {
+    position: relative;
+    display: inline-block;
+
+    &.gold::after {
+        content: "👑";
+        position: absolute;
+        top: -12px;
+        right: -12px;
+        font-size: 16px;
+        z-index: 10;
+        animation: bounce 1s infinite;
+        text-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+        pointer-events: none;
+    }
+
+    &.silver::after {
+        content: "🥈";
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        font-size: 14px;
+        z-index: 10;
+        text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+        pointer-events: none;
+    }
+
+    &.bronze::after {
+        content: "🥉";
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        font-size: 14px;
+        z-index: 10;
+        text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+        pointer-events: none;
+    }
+}
+
 .badge {
     @include mixins.flex-center;
     border-radius: variables.$radius-full;
     font-weight: variables.$font-weight-bold;
     transition: all variables.$transition-fast;
+    position: relative;
 
     &.default {
         background: var(--bg-hover);
@@ -63,15 +103,6 @@
             );
             animation: shimmer 2s infinite;
         }
-
-        &::after {
-            content: "👑";
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            font-size: 12px;
-            animation: bounce 1s infinite;
-        }
     }
 
     &.silver {
@@ -103,14 +134,6 @@
             );
             animation: shimmer 2.5s infinite;
         }
-
-        &::after {
-            content: "🥈";
-            position: absolute;
-            top: -6px;
-            right: -6px;
-            font-size: 10px;
-        }
     }
 
     &.bronze {
@@ -141,14 +164,6 @@
                 transparent 70%
             );
             animation: shimmer 3s infinite;
-        }
-
-        &::after {
-            content: "🥉";
-            position: absolute;
-            top: -6px;
-            right: -6px;
-            font-size: 10px;
         }
     }
 

@@ -186,33 +186,123 @@
     }
 }
 
-.circuitInfo {
+.raceDateTime {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
     gap: variables.$spacing-1;
-
-    .circuitName {
-        font-weight: variables.$font-weight-medium;
-        color: var(--text-primary);
-        font-size: variables.$font-size-sm;
-    }
-
-    .circuitLength {
-        font-size: variables.$font-size-xs;
-        color: var(--text-muted);
-    }
-}
-
-.country {
-    font-size: variables.$font-size-sm;
-    color: var(--text-primary);
-    font-weight: variables.$font-weight-medium;
+    padding-left: variables.$spacing-2;
 }
 
 .raceDate {
     font-size: variables.$font-size-sm;
     color: var(--text-primary);
     font-weight: variables.$font-weight-medium;
+    text-align: left;
+}
+
+.raceTime {
+    font-size: variables.$font-size-sm;
+    color: var(--text-primary);
+    font-weight: variables.$font-weight-semibold;
+    text-align: left;
+}
+
+.statusLabel {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: variables.$spacing-1;
+    padding: 2px variables.$spacing-1;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: variables.$radius-sm;
+    font-size: 10px;
+    font-weight: variables.$font-weight-semibold;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    min-width: fit-content;
+    max-width: 100px;
+}
+
+.statusIcon {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    flex-shrink: 0;
+}
+
+.statusLabel.completed {
+    background: rgba(34, 197, 94, 0.1);
+    border-color: rgba(34, 197, 94, 0.3);
+    color: #22c55e;
+}
+
+.statusLabel.completed .statusIcon {
+    background: #22c55e;
+}
+
+.statusLabel.ongoing {
+    background: rgba(251, 191, 36, 0.1);
+    border-color: rgba(251, 191, 36, 0.3);
+    color: #fbbf24;
+}
+
+.statusLabel.ongoing .statusIcon {
+    background: #fbbf24;
+}
+
+.statusLabel.upcoming {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.3);
+    color: #3b82f6;
+}
+
+.statusLabel.upcoming .statusIcon {
+    background: #3b82f6;
+}
+
+.statusLabel.tbd {
+    background: rgba(107, 114, 128, 0.1);
+    border-color: rgba(107, 114, 128, 0.3);
+    color: #6b7280;
+}
+
+.statusLabel.tbd .statusIcon {
+    background: #6b7280;
+}
+
+.winnerInfo {
+    display: flex;
+    flex-direction: column;
+    gap: variables.$spacing-1;
+    padding: variables.$spacing-1 0;
+}
+
+.winnerName {
+    font-size: variables.$font-size-sm;
+    font-weight: variables.$font-weight-semibold;
+    color: var(--text-primary);
+    line-height: 1.3;
+}
+
+.winnerTeam {
+    font-size: variables.$font-size-xs;
+    color: var(--text-muted);
+    font-weight: variables.$font-weight-medium;
+    line-height: 1.2;
+}
+
+.noWinner {
+    font-size: variables.$font-size-sm;
+    color: var(--text-muted);
+    font-weight: variables.$font-weight-medium;
+    text-align: center;
+    padding: variables.$spacing-1 0;
 }
 
 .loading,
@@ -230,68 +320,206 @@
 /* Mobile specific styles */
 @include mixins.mobile {
     .tableSection {
-        padding: variables.$spacing-4;
+        padding: variables.$spacing-3 !important;
     }
 
     .tableHeader {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: variables.$spacing-3;
-        margin-bottom: variables.$spacing-4;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: variables.$spacing-2 !important;
+        margin-bottom: variables.$spacing-3 !important;
     }
 
     .headerTop {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: variables.$spacing-3;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: variables.$spacing-2 !important;
+        width: 100% !important;
     }
 
     .toggleButton {
-        width: 100%;
-        justify-content: center;
-        padding: variables.$spacing-3 variables.$spacing-4 !important;
-        font-size: variables.$font-size-base !important;
+        width: 100% !important;
+        justify-content: center !important;
+        padding: variables.$spacing-2 variables.$spacing-3 !important;
+        font-size: variables.$font-size-sm !important;
+        margin-top: variables.$spacing-2 !important;
     }
 
     .tableHeader h3 {
-        font-size: variables.$font-size-xl;
+        font-size: variables.$font-size-lg !important;
+        margin-bottom: 0 !important;
     }
 
     .tableMeta {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: variables.$spacing-1;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: variables.$spacing-1 !important;
+        font-size: variables.$font-size-xs !important;
     }
 
     .raceInfo {
-        gap: variables.$spacing-1;
+        gap: variables.$spacing-1 !important;
     }
 
     .raceName {
-        font-size: variables.$font-size-sm;
+        font-size: variables.$font-size-sm !important;
+        line-height: 1.3 !important;
     }
 
     .raceLocation {
-        font-size: variables.$font-size-xs;
+        font-size: variables.$font-size-xs !important;
     }
 
-    .circuitInfo {
-        gap: variables.$spacing-1;
-    }
-
-    .circuitName {
-        font-size: variables.$font-size-xs;
-    }
-
-    .circuitLength {
-        font-size: variables.$font-size-xs;
-    }
-
-    .country {
-        font-size: variables.$font-size-xs;
+    .raceDateTime {
+        padding-left: 0 !important;
+        gap: 2px !important;
+        align-items: flex-start !important;
     }
 
     .raceDate {
+        font-size: variables.$font-size-xs !important;
+        line-height: 1.2 !important;
+    }
+
+    .raceTime {
+        font-size: variables.$font-size-xs !important;
+        line-height: 1.2 !important;
+    }
+
+    .statusLabel {
+        font-size: 8px !important;
+        padding: 2px variables.$spacing-1 !important;
+        gap: 2px !important;
+        max-width: 70px !important;
+        white-space: nowrap !important;
+    }
+
+    .statusIcon {
+        width: 3px !important;
+        height: 3px !important;
+    }
+
+    .winnerInfo {
+        gap: 2px !important;
+        padding: 2px 0 !important;
+    }
+
+    .winnerName {
+        font-size: variables.$font-size-xs !important;
+        line-height: 1.2 !important;
+    }
+
+    .winnerTeam {
+        font-size: 10px !important;
+        line-height: 1.1 !important;
+    }
+
+    .noWinner {
+        font-size: variables.$font-size-xs !important;
+        padding: 2px 0 !important;
+    }
+}
+
+// Extra small mobile devices
+@media (max-width: 480px) {
+    .tableSection {
+        padding: variables.$spacing-2 !important;
+    }
+
+    .tableHeader h3 {
+        font-size: variables.$font-size-base !important;
+    }
+
+    .toggleButton {
+        padding: variables.$spacing-2 !important;
+        font-size: variables.$font-size-xs !important;
+    }
+
+    .raceName {
+        font-size: variables.$font-size-xs !important;
+    }
+
+    .statusLabel {
+        font-size: 7px !important;
+        max-width: 60px !important;
+        padding: 1px 2px !important;
+    }
+}
+
+// Tablet styles
+@media (min-width: 768px) and (max-width: 1024px) {
+    .tableSection {
+        padding: variables.$spacing-6;
+    }
+
+    .tableHeader {
+        gap: variables.$spacing-3;
+        margin-bottom: variables.$spacing-5;
+    }
+
+    .headerTop {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: variables.$spacing-4;
+    }
+
+    .toggleButton {
+        width: auto;
+        padding: variables.$spacing-2 variables.$spacing-3 !important;
+        font-size: variables.$font-size-sm !important;
+    }
+
+    .tableHeader h3 {
+        font-size: variables.$font-size-2xl;
+    }
+
+    .tableMeta {
+        flex-direction: row;
+        align-items: center;
+        gap: variables.$spacing-2;
+    }
+
+    .raceDateTime {
+        padding-left: variables.$spacing-1;
+    }
+
+    .raceDate {
+        font-size: variables.$font-size-sm;
+    }
+
+    .raceTime {
+        font-size: variables.$font-size-sm;
+    }
+
+    .statusLabel {
+        font-size: 9px;
+        padding: 2px variables.$spacing-1;
+        max-width: 90px;
+    }
+
+    .statusIcon {
+        width: 3px;
+        height: 3px;
+    }
+
+    .winnerInfo {
+        gap: variables.$spacing-1;
+        padding: variables.$spacing-1 0;
+    }
+
+    .winnerName {
+        font-size: variables.$font-size-sm;
+        line-height: 1.3;
+    }
+
+    .winnerTeam {
         font-size: variables.$font-size-xs;
+        line-height: 1.2;
+    }
+
+    .noWinner {
+        font-size: variables.$font-size-sm;
+        padding: variables.$spacing-1 0;
     }
 }

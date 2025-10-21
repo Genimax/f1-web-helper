@@ -1,11 +1,6 @@
 import { F1Race } from "@/shared/api/types/f1Api";
-import { Badge } from "@/shared/ui";
 import { MobileCard } from "@/shared/ui";
-import {
-    getRaceStatus,
-    getStatusVariant,
-    getStatusDisplayText,
-} from "@/shared/lib/utils/scheduleUtils";
+import { formatRaceDateTime } from "@/shared/lib/utils/timeUtils";
 import styles from "./ScheduleMobileCard.module.scss";
 
 interface ScheduleMobileCardProps {
@@ -19,16 +14,10 @@ export const ScheduleMobileCard = ({
     isUpcoming = false,
     isNextRace = false,
 }: ScheduleMobileCardProps) => {
-    const formatDate = (dateString: string | null) => {
-        if (!dateString) return "TBD";
-        return new Date(dateString).toLocaleDateString("en-US", {
-            month: "short",
-            day: "numeric",
-            year: "numeric",
-        });
-    };
-
-    const status = getRaceStatus(race);
+    const raceDateTime = formatRaceDateTime(
+        race.schedule.race.date,
+        race.schedule.race.time
+    );
 
     return (
         <MobileCard
@@ -37,19 +26,13 @@ export const ScheduleMobileCard = ({
             }`}
         >
             <div className={styles.cardHeader}>
-                <div className={styles.roundInfo}>
-                    <Badge variant="secondary" className={styles.roundBadge}>
-                        Round {race.round}
-                    </Badge>
-                    <Badge
-                        variant={getStatusVariant(status)}
-                        className={styles.statusBadge}
-                    >
-                        {getStatusDisplayText(status)}
-                    </Badge>
-                </div>
-                <div className={styles.raceDate}>
-                    {formatDate(race.schedule.race.date)}
+                <div className={styles.raceDateTime}>
+                    <div className={styles.raceDate}>{raceDateTime.date}</div>
+                    {raceDateTime.time && (
+                        <div className={styles.raceTime}>
+                            {raceDateTime.time}
+                        </div>
+                    )}
                 </div>
             </div>
 
@@ -58,21 +41,8 @@ export const ScheduleMobileCard = ({
                     {race.raceName || `${race.circuit.circuitName} Grand Prix`}
                 </h4>
 
-                <div className={styles.circuitInfo}>
-                    <div className={styles.circuitName}>
-                        {race.circuit.circuitName}
-                    </div>
-                    <div className={styles.circuitLocation}>
-                        {race.circuit.city}, {race.circuit.country}
-                    </div>
-                    <div className={styles.circuitDetails}>
-                        <span className={styles.circuitLength}>
-                            {race.circuit.circuitLength}
-                        </span>
-                        <span className={styles.circuitCorners}>
-                            {race.circuit.corners} corners
-                        </span>
-                    </div>
+                <div className={styles.circuitLocation}>
+                    {race.circuit.city}, {race.circuit.country}
                 </div>
 
                 {race.winner && (

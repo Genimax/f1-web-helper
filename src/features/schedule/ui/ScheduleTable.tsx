@@ -3,7 +3,7 @@ import { Badge } from "@/shared/ui";
 import { F1Race } from "@/shared/api/types/f1Api";
 import { useSchedule } from "@/shared/lib/f1/useSchedule";
 import { useIsMobile } from "@/shared/lib/hooks/useMediaQuery";
-import { ScheduleMobileCard } from "./ScheduleMobileCard";
+import { ScheduleMobileCard } from "./index";
 import {
     filterRaces,
     getRaceStatus,
@@ -12,6 +12,7 @@ import {
     isRaceUpcoming,
     isNextRace,
 } from "@/shared/lib/utils/scheduleUtils";
+import { formatRaceDateTime } from "@/shared/lib/utils/timeUtils";
 import { useState } from "react";
 import styles from "./ScheduleTable.module.scss";
 
@@ -33,36 +34,24 @@ export const ScheduleTable = () => {
             width: "1fr",
         },
         {
-            key: "circuit",
-            title: "Circuit",
+            key: "raceDateTime",
+            title: "Race Date & Time (your timezone)",
             width: "200px",
+            align: "left" as const,
         },
         {
-            key: "country",
-            title: "Country",
-            width: "120px",
-        },
-        {
-            key: "raceDate",
-            title: "Race Date",
-            width: "120px",
-            align: "center" as const,
+            key: "winner",
+            title: "Winner",
+            width: "180px",
+            align: "left" as const,
         },
         {
             key: "status",
             title: "Status",
-            width: "100px",
+            width: "120px",
             align: "center" as const,
         },
     ];
-
-    const formatDate = (dateString: string | null) => {
-        if (!dateString) return "-";
-        return new Date(dateString).toLocaleDateString("en-US", {
-            month: "short",
-            day: "numeric",
-        });
-    };
 
     const handleToggleCompletedRaces = () => {
         setShowCompletedRaces(!showCompletedRaces);
@@ -75,7 +64,7 @@ export const ScheduleTable = () => {
     const renderCell = (value: any, column: any, row: F1Race) => {
         switch (column.key) {
             case "round":
-                return <Badge variant="secondary">{row.round}</Badge>;
+                return <Badge variant="default">{row.round}</Badge>;
 
             case "raceName":
                 return (
@@ -90,38 +79,57 @@ export const ScheduleTable = () => {
                     </div>
                 );
 
-            case "circuit":
+            case "raceDateTime":
+                const raceDateTime = formatRaceDateTime(
+                    row.schedule.race.date,
+                    row.schedule.race.time
+                );
+
                 return (
-                    <div className={styles.circuitInfo}>
-                        <span className={styles.circuitName}>
-                            {row.circuit.circuitName}
-                        </span>
-                        <span className={styles.circuitLength}>
-                            {row.circuit.circuitLength}
-                        </span>
+                    <div className={styles.raceDateTime}>
+                        <div className={styles.raceDate}>
+                            {raceDateTime.date}
+                        </div>
+                        {raceDateTime.time && (
+                            <div className={styles.raceTime}>
+                                {raceDateTime.time}
+                            </div>
+                        )}
                     </div>
                 );
 
-            case "country":
+            case "winner":
+                const status = getRaceStatus(row);
+                if (status === "completed" && row.winner) {
+                    return (
+                        <div className={styles.winnerInfo}>
+                            <div className={styles.winnerName}>
+                                {row.winner.name} {row.winner.surname}
+                            </div>
+                            {row.teamWinner && (
+                                <div className={styles.winnerTeam}>
+                                    {row.teamWinner.teamName}
+                                </div>
+                            )}
+                        </div>
+                    );
+                }
                 return (
-                    <span className={styles.country}>
-                        {row.circuit.country}
-                    </span>
-                );
-
-            case "raceDate":
-                return (
-                    <span className={styles.raceDate}>
-                        {formatDate(row.schedule.race.date)}
-                    </span>
+                    <div className={styles.noWinner}>
+                        {status === "completed" ? "TBD" : "-"}
+                    </div>
                 );
 
             case "status":
-                const status = getRaceStatus(row);
+                const raceStatus = getRaceStatus(row);
+                const statusText = getStatusDisplayText(raceStatus);
                 return (
-                    <Badge variant={getStatusVariant(status)}>
-                        {getStatusDisplayText(status)}
-                    </Badge>
+                    <div
+                        className={`${styles.statusLabel} ${styles[raceStatus]}`}
+                    >
+                        <span>{statusText}</span>
+                        <div className={styles.statusIcon}></div>
+                    </div>
                 );
 
             default:
@@ -169,8 +177,8 @@ export const ScheduleTable = () => {
                 <div className={styles.headerTop}>
                     <h3>Race Schedule</h3>
                     <Button
-                        variant="outline"
-                        size="sm"
+                        variant="secondary"
+                        size="small"
                         onClick={handleToggleCompletedRaces}
                         className={styles.toggleButton}
                     >

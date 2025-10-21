@@ -22,5 +22,13 @@ export const Badge = ({
         .filter(Boolean)
         .join(" ");
 
-    return <span className={badgeClasses}>{children}</span>;
+    const containerClasses = [styles.badgeContainer, styles[variant]]
+        .filter(Boolean)
+        .join(" ");
+
+    return (
+        <div className={containerClasses}>
+            <span className={badgeClasses}>{children}</span>
+        </div>
+    );
 };

@@ -4,29 +4,30 @@
 .card {
     .cardHeader {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
         align-items: flex-start;
         margin-bottom: variables.$spacing-4;
     }
 
-    .roundInfo {
+    .raceDateTime {
         display: flex;
         flex-direction: column;
+        align-items: flex-end;
+        text-align: right;
         gap: variables.$spacing-1;
-    }
-
-    .roundBadge {
-        align-self: flex-start;
-    }
-
-    .statusBadge {
-        align-self: flex-start;
     }
 
     .raceDate {
         font-size: variables.$font-size-sm;
-        color: var(--text-muted);
+        color: var(--text-primary);
         font-weight: variables.$font-weight-medium;
+        text-align: right;
+    }
+
+    .raceTime {
+        font-size: variables.$font-size-sm;
+        color: var(--text-primary);
+        font-weight: variables.$font-weight-semibold;
         text-align: right;
     }
 }
@@ -40,39 +41,10 @@
         line-height: 1.3;
     }
 
-    .circuitInfo {
+    .circuitLocation {
+        font-size: variables.$font-size-sm;
+        color: var(--text-muted);
         margin-bottom: variables.$spacing-4;
-
-        .circuitName {
-            font-size: variables.$font-size-base;
-            font-weight: variables.$font-weight-semibold;
-            color: var(--text-primary);
-            margin-bottom: variables.$spacing-1;
-        }
-
-        .circuitLocation {
-            font-size: variables.$font-size-sm;
-            color: var(--text-muted);
-            margin-bottom: variables.$spacing-1;
-        }
-
-        .circuitDetails {
-            display: flex;
-            gap: variables.$spacing-2;
-            font-size: variables.$font-size-xs;
-            color: var(--text-muted);
-
-            .circuitLength {
-                font-weight: variables.$font-weight-medium;
-            }
-
-            .circuitCorners {
-                &::before {
-                    content: "•";
-                    margin-right: variables.$spacing-1;
-                }
-            }
-        }
     }
 
     .winnerInfo {
@@ -142,21 +114,6 @@
         border-radius: variables.$radius-sm variables.$radius-sm 0 0;
     }
 
-    .cardHeader {
-        .statusBadge {
-            background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
-            color: white;
-            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
-            font-weight: variables.$font-weight-bold;
-        }
-
-        .roundBadge {
-            background: rgba(220, 38, 38, 0.1);
-            color: #dc2626;
-            border: 1px solid rgba(220, 38, 38, 0.2);
-        }
-    }
-
     .cardContent {
         .raceName {
             color: #dc2626;
@@ -209,12 +166,6 @@
             color: var(--color-info);
             font-weight: variables.$font-weight-bold;
         }
-
-        .circuitInfo {
-            .circuitName {
-                color: var(--color-info-dark);
-            }
-        }
     }
 }
 
@@ -239,27 +190,156 @@
 // Responsive design
 @include mixins.mobile {
     .card {
+        padding: variables.$spacing-3 !important;
+        margin-bottom: variables.$spacing-3 !important;
+
         .cardHeader {
-            flex-direction: column;
-            gap: variables.$spacing-2;
-            align-items: flex-start;
+            justify-content: flex-end !important;
+            align-items: flex-start !important;
+            margin-bottom: variables.$spacing-2 !important;
+        }
+
+        .raceDateTime {
+            align-items: flex-end !important;
+            text-align: right !important;
+            gap: 2px !important;
         }
 
         .raceDate {
-            text-align: left;
+            text-align: right !important;
+            font-size: variables.$font-size-xs !important;
+            line-height: 1.2 !important;
+        }
+
+        .raceTime {
+            text-align: right !important;
+            font-size: variables.$font-size-xs !important;
+            line-height: 1.2 !important;
         }
     }
 
     .cardContent {
         .raceName {
-            font-size: variables.$font-size-base;
+            font-size: variables.$font-size-base !important;
+            margin-bottom: variables.$spacing-2 !important;
+            line-height: 1.3 !important;
         }
 
-        .circuitInfo {
-            .circuitDetails {
-                flex-direction: column;
-                gap: variables.$spacing-1;
-            }
+        .circuitLocation {
+            font-size: variables.$font-size-xs !important;
+            margin-bottom: variables.$spacing-2 !important;
+            line-height: 1.3 !important;
         }
+
+        .raceStats {
+            font-size: variables.$font-size-xs !important;
+        }
+    }
+
+    .nextRace {
+        transform: none !important;
+        padding: variables.$spacing-3 !important;
+
+        &::after {
+            top: variables.$spacing-1 !important;
+            right: variables.$spacing-2 !important;
+            font-size: variables.$font-size-sm !important;
+        }
+    }
+
+    .upcomingRace {
+        border-width: 1px !important;
+        padding: variables.$spacing-3 !important;
+    }
+}
+
+// Extra small mobile devices
+@media (max-width: 480px) {
+    .card {
+        padding: variables.$spacing-2 !important;
+        margin-bottom: variables.$spacing-2 !important;
+
+        .cardHeader {
+            justify-content: flex-end !important;
+            margin-bottom: variables.$spacing-1 !important;
+        }
+    }
+
+    .cardContent {
+        .raceName {
+            font-size: variables.$font-size-sm !important;
+            margin-bottom: variables.$spacing-1 !important;
+        }
+
+        .circuitLocation {
+            font-size: variables.$font-size-xs !important;
+            margin-bottom: variables.$spacing-1 !important;
+        }
+    }
+
+    .raceDateTime {
+        gap: 1px !important;
+    }
+
+    .raceDate {
+        font-size: 10px !important;
+    }
+
+    .raceTime {
+        font-size: 10px !important;
+    }
+}
+
+// Tablet styles
+@media (min-width: 768px) and (max-width: 1024px) {
+    .card {
+        .cardHeader {
+            justify-content: flex-end;
+            align-items: flex-start;
+            margin-bottom: variables.$spacing-4;
+        }
+
+        .raceDateTime {
+            align-items: flex-end;
+            text-align: right;
+            gap: variables.$spacing-1;
+        }
+
+        .raceDate {
+            text-align: right;
+            font-size: variables.$font-size-sm;
+        }
+
+        .raceTime {
+            text-align: right;
+            font-size: variables.$font-size-base;
+        }
+    }
+
+    .cardContent {
+        .raceName {
+            font-size: variables.$font-size-lg;
+            margin-bottom: variables.$spacing-3;
+        }
+
+        .circuitLocation {
+            font-size: variables.$font-size-sm;
+            margin-bottom: variables.$spacing-3;
+        }
+    }
+
+    .nextRace {
+        transform: scale(1.01);
+
+        &::after {
+            top: variables.$spacing-2;
+            right: variables.$spacing-3;
+            font-size: variables.$font-size-lg;
+        }
+    }
+
+    .upcomingRace {
+        // Планшетные стили для будущих гонок
+        border-width: 1px;
     }
 }
