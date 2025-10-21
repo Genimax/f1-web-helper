@@ -36,6 +36,13 @@
     padding: 0;
 }
 
+// Universal transitions for CSS custom properties
+* {
+    transition: background-color variables.$transition-normal,
+        color variables.$transition-normal,
+        border-color variables.$transition-normal;
+}
+
 html {
     font-size: 14px;
     line-height: 1.5;
@@ -54,7 +61,8 @@ body {
     color: variables.$text-primary;
     background: variables.$bg-primary;
     transition: color variables.$transition-normal,
-        background-color variables.$transition-normal;
+        background-color variables.$transition-normal,
+        border-color variables.$transition-normal;
     overflow-x: hidden;
 }
 

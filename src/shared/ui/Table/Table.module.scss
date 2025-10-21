@@ -6,6 +6,8 @@
     border-radius: variables.$radius-xl;
     overflow: hidden;
     border: 1px solid var(--border-primary);
+    transition: background-color variables.$transition-normal,
+        border-color variables.$transition-normal;
 }
 
 .tableHead {
@@ -13,6 +15,8 @@
     grid-template-columns: 60px 1fr 200px 100px 100px 100px;
     background: var(--bg-tertiary);
     border-bottom: 1px solid var(--border-primary);
+    transition: background-color variables.$transition-normal,
+        border-color variables.$transition-normal;
 }
 
 .tableBody {
@@ -25,7 +29,9 @@
     grid-template-columns: 60px 1fr 200px 100px 100px 100px;
     background: var(--bg-card);
     border-bottom: 1px solid var(--border-primary);
-    transition: all variables.$transition-fast;
+    transition: background-color variables.$transition-normal,
+        border-color variables.$transition-normal,
+        transform variables.$transition-fast;
 
     &:last-child {
         border-bottom: none;
@@ -46,6 +52,10 @@
     );
     border-left: 4px solid #ffd700;
     position: relative;
+    transition: background-color variables.$transition-normal,
+        border-color variables.$transition-normal,
+        transform variables.$transition-fast,
+        box-shadow variables.$transition-fast;
 
     &::before {
         content: "";
@@ -60,6 +70,7 @@
             #ffd700 50%,
             transparent 100%
         );
+        transition: background variables.$transition-normal;
     }
 
     &:hover {
@@ -81,6 +92,10 @@
     );
     border-left: 4px solid #c0c0c0;
     position: relative;
+    transition: background-color variables.$transition-normal,
+        border-color variables.$transition-normal,
+        transform variables.$transition-fast,
+        box-shadow variables.$transition-fast;
 
     &::before {
         content: "";
@@ -95,6 +110,7 @@
             #c0c0c0 50%,
             transparent 100%
         );
+        transition: background variables.$transition-normal;
     }
 
     &:hover {
@@ -116,6 +132,10 @@
     );
     border-left: 4px solid #cd7f32;
     position: relative;
+    transition: background-color variables.$transition-normal,
+        border-color variables.$transition-normal,
+        transform variables.$transition-fast,
+        box-shadow variables.$transition-fast;
 
     &::before {
         content: "";
@@ -130,6 +150,7 @@
             #cd7f32 50%,
             transparent 100%
         );
+        transition: background variables.$transition-normal;
     }
 
     &:hover {
@@ -149,6 +170,7 @@
     display: flex;
     align-items: center;
     font-size: variables.$font-size-sm;
+    transition: color variables.$transition-normal;
 }
 
 .tableHeaderCell {
@@ -180,7 +202,10 @@
         border-radius: variables.$radius-lg;
         padding: variables.$spacing-4;
         gap: variables.$spacing-3;
-        transition: all variables.$transition-fast;
+        transition: background-color variables.$transition-normal,
+            border-color variables.$transition-normal,
+            transform variables.$transition-fast,
+            box-shadow variables.$transition-fast;
 
         &:hover {
             background: var(--bg-hover);
