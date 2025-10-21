@@ -125,12 +125,14 @@ export const formatRaceDateTimeWithTimezone = (
 ): string => {
     const formatted = formatRaceDateTime(dateString, timeString);
 
-    if (showTimezone && formatted !== "TBD") {
+    if (showTimezone && formatted.date !== "TBD") {
         const timezoneInfo = getUserTimezoneInfo();
-        return `${formatted} (${timezoneInfo.timezone})`;
+        const timePart = formatted.time ? ` ${formatted.time}` : "";
+        return `${formatted.date}${timePart} (${timezoneInfo.timezone})`;
     }
 
-    return formatted;
+    const timePart = formatted.time ? ` ${formatted.time}` : "";
+    return `${formatted.date}${timePart}`;
 };
 
 /**
