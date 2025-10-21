@@ -126,3 +126,14 @@ $z-modal: 1050;
 $z-popover: 1060;
 $z-tooltip: 1070;
 $z-toast: 1080;
+
+// Additional variables for mixins compatibility
+$primary-color: $f1-red;
+$white: #ffffff;
+$black: #000000;
+
+// Border radius aliases for backward compatibility
+$border-radius-sm: $radius-sm;
+$border-radius-md: $radius-md;
+$border-radius-lg: $radius-lg;
+$border-radius-xl: $radius-xl;

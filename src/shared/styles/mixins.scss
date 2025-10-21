@@ -64,7 +64,7 @@
     align-items: center;
     justify-content: center;
     border: none;
-    border-radius: $border-radius-md;
+    border-radius: variables.$border-radius-md;
     font-family: variables.$font-family-primary;
     font-weight: variables.$font-weight-medium;
     text-decoration: none;
@@ -79,30 +79,33 @@
 
 @mixin button-primary {
     @include button-base;
-    background-color: $primary-color;
-    color: $white;
+    background-color: variables.$primary-color;
+    color: variables.$white;
 
     &:hover:not(:disabled) {
-        background-color: color.adjust($primary-color, $lightness: -10%);
+        background-color: color.adjust(
+            variables.$primary-color,
+            $lightness: -10%
+        );
     }
 }
 
 @mixin button-secondary {
     @include button-base;
     background-color: transparent;
-    color: $primary-color;
-    border: 1px solid $primary-color;
+    color: variables.$primary-color;
+    border: 1px solid variables.$primary-color;
 
     &:hover:not(:disabled) {
-        background-color: $primary-color;
-        color: $white;
+        background-color: variables.$primary-color;
+        color: variables.$white;
     }
 }
 
 // Cards
 @mixin card {
-    background-color: $white;
-    border-radius: $border-radius-lg;
+    background-color: variables.$white;
+    border-radius: variables.$border-radius-lg;
     box-shadow: variables.$shadow-md;
     padding: variables.$spacing-6;
 }
