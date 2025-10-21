@@ -222,6 +222,61 @@
 }
 
 // Адаптивность
+// Small tablet styles (640px - 768px)
+@media (min-width: 640px) and (max-width: 768px) {
+    .countdownTimer {
+        min-width: 260px;
+        padding: 12px 14px;
+        gap: 10px;
+    }
+
+    .timeValue {
+        font-size: 22px;
+        padding: 8px 12px;
+        min-width: 44px;
+    }
+
+    .separator {
+        font-size: 18px;
+    }
+
+    .nextRaceLabel {
+        font-size: 11px;
+    }
+
+    .timer {
+        gap: 8px;
+    }
+}
+
+// Tablet styles (769px - 1024px)
+@media (min-width: 769px) and (max-width: 1024px) {
+    .countdownTimer {
+        min-width: 300px;
+        padding: 16px 18px;
+        gap: 14px;
+    }
+
+    .timeValue {
+        font-size: 26px;
+        padding: 12px 16px;
+        min-width: 50px;
+    }
+
+    .separator {
+        font-size: 22px;
+    }
+
+    .nextRaceLabel {
+        font-size: 13px;
+    }
+
+    .timer {
+        gap: 12px;
+    }
+}
+
+// Small tablet and mobile styles (up to 768px)
 @media (max-width: 768px) {
     .countdownTimer {
         min-width: 280px;
@@ -274,4 +329,17 @@
         font-size: 11px;
         margin-bottom: 4px;
     }
+}
+
+// Анимации появления
+.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fadeIn {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }

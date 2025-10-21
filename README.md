@@ -8,6 +8,16 @@
 [![Redux Toolkit](https://img.shields.io/badge/Redux_Toolkit-2.9.1-purple?style=for-the-badge&logo=redux)](https://redux-toolkit.js.org/)
 [![SCSS](https://img.shields.io/badge/SCSS-1.93.2-pink?style=for-the-badge&logo=sass)](https://sass-lang.com/)
 
+## 🌐 Живая демонстрация
+
+<div align="center">
+
+### 🚀 [**ПОСМОТРЕТЬ ПРОЕКТ**](https://f1-web-helper.vercel.app)
+
+[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-FF6B6B?style=for-the-badge&logo=vercel&logoColor=white)](https://f1-web-helper.vercel.app)
+
+</div>
+
 ## 📋 Оглавление
 
 -   [🎯 Описание проекта](#-описание-проекта)

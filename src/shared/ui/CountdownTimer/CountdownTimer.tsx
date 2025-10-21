@@ -16,6 +16,7 @@ export const CountdownTimer = () => {
         minutes: 0,
     });
     const [blink, setBlink] = useState(false);
+    const [isReady, setIsReady] = useState(false);
 
     useEffect(() => {
         if (!nextRaceData?.race?.[0]?.schedule?.race?.date) return;
@@ -60,12 +61,21 @@ export const CountdownTimer = () => {
         return () => clearInterval(blinkTimer);
     }, []);
 
+    // Эффект для установки готовности таймера
+    useEffect(() => {
+        if (!loading && nextRaceData?.race?.[0]) {
+            // Небольшая задержка для плавного появления
+            const timer = setTimeout(() => {
+                setIsReady(true);
+            }, 100);
+            return () => clearTimeout(timer);
+        } else {
+            setIsReady(false);
+        }
+    }, [loading, nextRaceData]);
+
     if (loading) {
-        return (
-            <div className={styles.countdownTimer}>
-                <div className={styles.loading}>Loading...</div>
-            </div>
-        );
+        return null;
     }
 
     if (error || !nextRaceData?.race?.[0]) {
@@ -81,7 +91,11 @@ export const CountdownTimer = () => {
         timeLeft.days === 0 && timeLeft.hours === 0 && timeLeft.minutes === 0;
 
     return (
-        <div className={styles.countdownTimer}>
+        <div
+            className={`${styles.countdownTimer} ${
+                isReady ? styles.fadeIn : styles.hidden
+            }`}
+        >
             <div className={styles.nextRaceLabel}>NEXT RACE</div>
 
             {isRaceOver ? (
