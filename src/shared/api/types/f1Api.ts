@@ -170,3 +170,15 @@ export interface F1NextRaceResponse {
     championship: F1Championship;
     race: F1Race[];
 }
+
+// Типы для API расписания текущего сезона
+export interface F1CurrentScheduleResponse {
+    api: string;
+    url: string;
+    limit: number;
+    offset: number;
+    total: number;
+    season: number;
+    championship: F1Championship;
+    races: F1Race[];
+}

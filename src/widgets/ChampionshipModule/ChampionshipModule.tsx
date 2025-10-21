@@ -3,8 +3,10 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAppSelector } from "@/shared/lib/store/hooks";
+import type { RootState } from "@/shared/lib/store";
 import { DriverStandingsTable } from "@/features/driver-standings/ui/DriverStandingsTable";
 import { TeamStandingsTable } from "@/features/team-standings/ui/TeamStandingsTable";
+import { ScheduleTable } from "@/features/schedule/ui/ScheduleTable";
 import styles from "./ChampionshipModule.module.scss";
 
 type TabType = "drivers" | "teams" | "schedule" | "calculator";
@@ -14,7 +16,7 @@ export const ChampionshipModule = () => {
 
     // Получаем сезон из Redux store
     const { driversChampionship, constructorsChampionship } = useAppSelector(
-        (state) => state.f1
+        (state: RootState) => state.f1
     );
 
     // Определяем текущий сезон (приоритет у drivers, если нет - у constructors)
@@ -64,14 +66,7 @@ export const ChampionshipModule = () => {
             case "teams":
                 return <TeamStandingsTable />;
             case "schedule":
-                return (
-                    <div className={styles.placeholder}>
-                        <h3>Schedule Coming Soon</h3>
-                        <p>
-                            Race schedule and calendar will be available here.
-                        </p>
-                    </div>
-                );
+                return <ScheduleTable />;
             case "calculator":
                 return (
                     <div className={styles.placeholder}>

@@ -7,6 +7,8 @@ import {
 
 // Экспортируем новый хук для следующего уикенда
 export { useNextRace } from "./useNextRace";
+// Экспортируем хук для расписания
+export { useSchedule } from "./useSchedule";
 
 export const useF1Data = () => {
     const dispatch = useAppDispatch();

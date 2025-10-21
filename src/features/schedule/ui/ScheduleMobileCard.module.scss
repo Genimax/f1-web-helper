@@ -1,0 +1,144 @@
+@use "../../../shared/styles/variables";
+@use "../../../shared/styles/mixins";
+
+.card {
+    .cardHeader {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: variables.$spacing-4;
+    }
+
+    .roundInfo {
+        display: flex;
+        flex-direction: column;
+        gap: variables.$spacing-1;
+    }
+
+    .roundBadge {
+        align-self: flex-start;
+    }
+
+    .statusBadge {
+        align-self: flex-start;
+    }
+
+    .raceDate {
+        font-size: variables.$font-size-sm;
+        color: var(--text-muted);
+        font-weight: variables.$font-weight-medium;
+        text-align: right;
+    }
+}
+
+.cardContent {
+    .raceName {
+        margin: 0 0 variables.$spacing-4 0;
+        font-size: variables.$font-size-lg;
+        font-weight: variables.$font-weight-bold;
+        color: var(--text-primary);
+        line-height: 1.3;
+    }
+
+    .circuitInfo {
+        margin-bottom: variables.$spacing-4;
+
+        .circuitName {
+            font-size: variables.$font-size-base;
+            font-weight: variables.$font-weight-semibold;
+            color: var(--text-primary);
+            margin-bottom: variables.$spacing-1;
+        }
+
+        .circuitLocation {
+            font-size: variables.$font-size-sm;
+            color: var(--text-muted);
+            margin-bottom: variables.$spacing-1;
+        }
+
+        .circuitDetails {
+            display: flex;
+            gap: variables.$spacing-2;
+            font-size: variables.$font-size-xs;
+            color: var(--text-muted);
+
+            .circuitLength {
+                font-weight: variables.$font-weight-medium;
+            }
+
+            .circuitCorners {
+                &::before {
+                    content: "•";
+                    margin-right: variables.$spacing-1;
+                }
+            }
+        }
+    }
+
+    .winnerInfo {
+        padding: variables.$spacing-2;
+        background: var(--background-secondary);
+        border-radius: variables.$radius-md;
+        margin-bottom: variables.$spacing-4;
+
+        .winnerLabel {
+            font-size: variables.$font-size-xs;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: variables.$font-weight-semibold;
+            letter-spacing: 0.5px;
+            margin-bottom: variables.$spacing-1;
+        }
+
+        .winnerName {
+            font-size: variables.$font-size-base;
+            font-weight: variables.$font-weight-semibold;
+            color: var(--text-primary);
+            margin-bottom: variables.$spacing-1;
+        }
+
+        .winnerTeam {
+            font-size: variables.$font-size-sm;
+            color: var(--text-muted);
+        }
+    }
+
+    .raceStats {
+        display: flex;
+        gap: variables.$spacing-2;
+        font-size: variables.$font-size-sm;
+        color: var(--text-muted);
+
+        .laps {
+            font-weight: variables.$font-weight-medium;
+        }
+    }
+}
+
+// Responsive design
+@include mixins.mobile {
+    .card {
+        .cardHeader {
+            flex-direction: column;
+            gap: variables.$spacing-2;
+            align-items: flex-start;
+        }
+
+        .raceDate {
+            text-align: left;
+        }
+    }
+
+    .cardContent {
+        .raceName {
+            font-size: variables.$font-size-base;
+        }
+
+        .circuitInfo {
+            .circuitDetails {
+                flex-direction: column;
+                gap: variables.$spacing-1;
+            }
+        }
+    }
+}

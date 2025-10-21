@@ -4,6 +4,8 @@ import {
     F1DriversChampionshipResponse,
     F1ConstructorChampionshipEntry,
     F1ConstructorsChampionshipResponse,
+    F1CurrentScheduleResponse,
+    F1Race,
 } from "@/shared/api/types/f1Api";
 
 interface F1State {
@@ -21,6 +23,13 @@ interface F1State {
         lastUpdated: string | null;
         season: number | null;
     };
+    schedule: {
+        data: F1Race[] | null;
+        loading: boolean;
+        error: string | null;
+        lastUpdated: string | null;
+        season: number | null;
+    };
 }
 
 const initialState: F1State = {
@@ -32,6 +41,13 @@ const initialState: F1State = {
         season: null,
     },
     constructorsChampionship: {
+        data: null,
+        loading: false,
+        error: null,
+        lastUpdated: null,
+        season: null,
+    },
+    schedule: {
         data: null,
         loading: false,
         error: null,
@@ -77,18 +93,38 @@ export const fetchConstructorsChampionship = createAsyncThunk(
     }
 );
 
+export const fetchSchedule = createAsyncThunk(
+    "f1/fetchSchedule",
+    async (params?: { limit?: number; offset?: number }) => {
+        const response = await fetch(
+            `/api/f1/current?${new URLSearchParams({
+                ...(params?.limit && { limit: params.limit.toString() }),
+                ...(params?.offset && { offset: params.offset.toString() }),
+            })}`
+        );
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch schedule");
+        }
+
+        return response.json() as Promise<F1CurrentScheduleResponse>;
+    }
+);
+
 const f1Slice = createSlice({
     name: "f1",
     initialState,
     reducers: {
         clearError: (
             state,
-            action: PayloadAction<"drivers" | "constructors">
+            action: PayloadAction<"drivers" | "constructors" | "schedule">
         ) => {
             if (action.payload === "drivers") {
                 state.driversChampionship.error = null;
-            } else {
+            } else if (action.payload === "constructors") {
                 state.constructorsChampionship.error = null;
+            } else {
+                state.schedule.error = null;
             }
         },
     },
@@ -143,6 +179,25 @@ const f1Slice = createSlice({
                         "Failed to fetch constructors championship";
                 }
             );
+
+        // Schedule
+        builder
+            .addCase(fetchSchedule.pending, (state) => {
+                state.schedule.loading = true;
+                state.schedule.error = null;
+            })
+            .addCase(fetchSchedule.fulfilled, (state, action) => {
+                state.schedule.loading = false;
+                state.schedule.data = action.payload.races;
+                state.schedule.season = action.payload.season;
+                state.schedule.lastUpdated = new Date().toISOString();
+                state.schedule.error = null;
+            })
+            .addCase(fetchSchedule.rejected, (state, action) => {
+                state.schedule.loading = false;
+                state.schedule.error =
+                    action.error.message || "Failed to fetch schedule";
+            });
     },
 });
 

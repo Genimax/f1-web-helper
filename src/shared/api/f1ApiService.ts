@@ -2,6 +2,7 @@ import {
     F1DriversChampionshipResponse,
     F1ApiParams,
     F1NextRaceResponse,
+    F1CurrentScheduleResponse,
 } from "./types/f1Api";
 
 const BASE_URL = "https://f1api.dev/api";
@@ -69,8 +70,10 @@ class F1ApiService {
     /**
      * Получает расписание гонок текущего года
      */
-    async getCurrentSchedule(params?: F1ApiParams): Promise<any> {
-        return this.fetchData("/current/schedule", params);
+    async getCurrentSchedule(
+        params?: F1ApiParams
+    ): Promise<F1CurrentScheduleResponse> {
+        return this.fetchData<F1CurrentScheduleResponse>("/current", params);
     }
 
     /**
