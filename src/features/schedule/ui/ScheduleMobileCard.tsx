@@ -7,12 +7,14 @@ interface ScheduleMobileCardProps {
     race: F1Race;
     isUpcoming?: boolean;
     isNextRace?: boolean;
+    onClick?: () => void;
 }
 
 export const ScheduleMobileCard = ({
     race,
     isUpcoming = false,
     isNextRace = false,
+    onClick,
 }: ScheduleMobileCardProps) => {
     const raceDateTime = formatRaceDateTime(
         race.schedule.race.date,
@@ -24,6 +26,7 @@ export const ScheduleMobileCard = ({
             className={`${styles.card} ${isNextRace ? styles.nextRace : ""} ${
                 isUpcoming ? styles.upcomingRace : ""
             }`}
+            onClick={onClick}
         >
             <div className={styles.cardHeader}>
                 <div className={styles.raceDateTime}>

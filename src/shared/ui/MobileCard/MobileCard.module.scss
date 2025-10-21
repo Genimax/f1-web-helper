@@ -13,4 +13,25 @@
         transform: translateY(-2px);
         box-shadow: variables.$shadow-md;
     }
+
+    // Стили для кликабельных карточек
+    &[role="button"] {
+        cursor: pointer;
+        user-select: none;
+
+        &:hover {
+            background: var(--bg-hover);
+            transform: translateY(-2px);
+            box-shadow: variables.$shadow-md;
+        }
+
+        &:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+
+        &:active {
+            transform: translateY(-1px);
+        }
+    }
 }

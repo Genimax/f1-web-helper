@@ -14,6 +14,7 @@ interface TableProps<T = Record<string, any>> {
     renderCell?: (value: any, column: TableColumn, row: T) => ReactNode;
     className?: string;
     getRowClassName?: (row: T, index: number) => string;
+    onRowClick?: (row: T) => void;
 }
 
 export const Table = <T extends Record<string, any>>({
@@ -22,6 +23,7 @@ export const Table = <T extends Record<string, any>>({
     renderCell,
     className = "",
     getRowClassName,
+    onRowClick,
 }: TableProps<T>) => {
     const tableClasses = [styles.table, className].filter(Boolean).join(" ");
 
@@ -84,6 +86,18 @@ export const Table = <T extends Record<string, any>>({
                             key={index}
                             className={finalRowClassName}
                             style={{ gridTemplateColumns }}
+                            onClick={() => onRowClick?.(row)}
+                            role={onRowClick ? "button" : undefined}
+                            tabIndex={onRowClick ? 0 : undefined}
+                            onKeyDown={(e) => {
+                                if (
+                                    onRowClick &&
+                                    (e.key === "Enter" || e.key === " ")
+                                ) {
+                                    e.preventDefault();
+                                    onRowClick(row);
+                                }
+                            }}
                         >
                             {columns.map((column) => (
                                 <div

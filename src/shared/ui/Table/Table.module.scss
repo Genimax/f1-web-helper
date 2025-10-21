@@ -41,6 +41,26 @@
         background: var(--bg-hover);
         transform: translateX(4px);
     }
+
+    // Стили для кликабельных строк
+    &[role="button"] {
+        cursor: pointer;
+        user-select: none;
+
+        &:hover {
+            background: var(--bg-hover);
+            transform: translateX(4px);
+        }
+
+        &:focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+
+        &:active {
+            transform: translateX(2px);
+        }
+    }
 }
 
 // Специальные стили для топ-3 позиций

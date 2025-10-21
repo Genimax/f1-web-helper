@@ -1,0 +1,149 @@
+@use "../../../shared/styles/variables";
+@use "../../../shared/styles/mixins";
+
+.sessionSchedule {
+    display: flex;
+    flex-direction: column;
+    gap: variables.$spacing-4;
+}
+
+.sessionsList {
+    display: flex;
+    flex-direction: column;
+    gap: variables.$spacing-3;
+}
+
+.sessionItem {
+    background: var(--bg-card);
+    border: 1px solid var(--border-primary);
+    border-radius: variables.$radius-lg;
+    padding: variables.$spacing-4;
+    transition: all variables.$transition-fast;
+
+    &:hover {
+        border-color: var(--text-accent);
+        box-shadow: variables.$shadow-md;
+        transform: translateY(-1px);
+    }
+
+    &.raceSession {
+        border-color: var(--text-accent);
+        background: linear-gradient(
+            135deg,
+            var(--bg-card) 0%,
+            rgba(225, 6, 0, 0.05) 100%
+        );
+        box-shadow: variables.$glow-red;
+    }
+}
+
+.sessionHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: variables.$spacing-3;
+    gap: variables.$spacing-4;
+}
+
+.sessionName {
+    font-size: variables.$font-size-base;
+    font-weight: variables.$font-weight-semibold;
+    color: var(--text-primary);
+    flex: 1;
+    font-family: variables.$font-family-primary;
+}
+
+.sessionType {
+    flex-shrink: 0;
+}
+
+.typeBadge {
+    display: inline-block;
+    padding: variables.$spacing-1 variables.$spacing-3;
+    border-radius: variables.$radius-full;
+    font-size: variables.$font-size-xs;
+    font-weight: variables.$font-weight-medium;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-family: variables.$font-family-primary;
+
+    &.practice {
+        background-color: rgba(0, 210, 190, 0.1);
+        color: variables.$f1-blue;
+        border: 1px solid rgba(0, 210, 190, 0.2);
+    }
+
+    &.qualifying {
+        background-color: rgba(255, 135, 0, 0.1);
+        color: variables.$f1-orange;
+        border: 1px solid rgba(255, 135, 0, 0.2);
+    }
+
+    &.sprint {
+        background-color: rgba(255, 215, 0, 0.1);
+        color: variables.$f1-gold;
+        border: 1px solid rgba(255, 215, 0, 0.2);
+    }
+
+    &.race {
+        background-color: rgba(225, 6, 0, 0.1);
+        color: variables.$f1-red;
+        border: 1px solid rgba(225, 6, 0, 0.2);
+    }
+}
+
+.sessionDateTime {
+    display: flex;
+    flex-direction: column;
+    gap: variables.$spacing-1;
+}
+
+.sessionDate {
+    font-size: variables.$font-size-sm;
+    color: var(--text-primary);
+    font-weight: variables.$font-weight-medium;
+}
+
+.sessionTime {
+    font-size: variables.$font-size-sm;
+    color: var(--text-accent);
+    font-weight: variables.$font-weight-semibold;
+}
+
+.note {
+    display: flex;
+    align-items: center;
+    gap: variables.$spacing-2;
+    padding: variables.$spacing-3;
+    background: rgba(225, 6, 0, 0.05);
+    border: 1px solid rgba(225, 6, 0, 0.2);
+    border-radius: variables.$radius-md;
+    font-size: variables.$font-size-xs;
+    color: var(--text-muted);
+}
+
+.noteIcon {
+    font-size: variables.$font-size-sm;
+}
+
+// Mobile styles
+@include mixins.mobile {
+    .sessionItem {
+        padding: variables.$spacing-3;
+    }
+
+    .sessionHeader {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: variables.$spacing-2;
+    }
+
+    .sessionName {
+        font-size: variables.$font-size-sm;
+    }
+
+    .typeBadge {
+        font-size: variables.$font-size-xs;
+        padding: variables.$spacing-1 variables.$spacing-2;
+    }
+}

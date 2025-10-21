@@ -3,7 +3,7 @@ import { Badge } from "@/shared/ui";
 import { F1Race } from "@/shared/api/types/f1Api";
 import { useSchedule } from "@/shared/lib/f1/useSchedule";
 import { useIsMobile } from "@/shared/lib/hooks/useMediaQuery";
-import { ScheduleMobileCard } from "./index";
+import { ScheduleMobileCard, RaceDetailsModal } from "./index";
 import {
     filterRaces,
     getRaceStatus,
@@ -20,6 +20,8 @@ export const ScheduleTable = () => {
     const { schedule } = useSchedule();
     const isMobile = useIsMobile();
     const [showCompletedRaces, setShowCompletedRaces] = useState(false);
+    const [selectedRace, setSelectedRace] = useState<F1Race | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const columns = [
         {
@@ -55,6 +57,16 @@ export const ScheduleTable = () => {
 
     const handleToggleCompletedRaces = () => {
         setShowCompletedRaces(!showCompletedRaces);
+    };
+
+    const handleRaceClick = (race: F1Race) => {
+        setSelectedRace(race);
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+        setSelectedRace(null);
     };
 
     const filteredRaces = schedule.data
@@ -214,6 +226,7 @@ export const ScheduleTable = () => {
                             race={race}
                             isUpcoming={isRaceUpcoming(race)}
                             isNextRace={isNextRace(race, schedule.data || [])}
+                            onClick={() => handleRaceClick(race)}
                         />
                     ))}
                 </div>
@@ -223,6 +236,7 @@ export const ScheduleTable = () => {
                     data={filteredRaces}
                     renderCell={renderCell}
                     className={styles.table}
+                    onRowClick={handleRaceClick}
                     getRowClassName={(race) => {
                         if (isNextRace(race, schedule.data || [])) {
                             return styles.nextRaceRow;
@@ -234,6 +248,12 @@ export const ScheduleTable = () => {
                     }}
                 />
             )}
+
+            <RaceDetailsModal
+                isOpen={isModalOpen}
+                onClose={handleCloseModal}
+                race={selectedRace}
+            />
         </div>
     );
 };

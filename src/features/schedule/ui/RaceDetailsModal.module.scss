@@ -1,0 +1,152 @@
+@use "../../../shared/styles/variables";
+@use "../../../shared/styles/mixins";
+
+.raceModal {
+    max-width: 800px;
+}
+
+.raceDetails {
+    display: flex;
+    flex-direction: column;
+    gap: variables.$spacing-8;
+}
+
+.sectionTitle {
+    font-size: variables.$font-size-lg;
+    font-weight: variables.$font-weight-semibold;
+    color: var(--text-primary);
+    margin: 0 0 variables.$spacing-4 0;
+    border-bottom: 2px solid var(--text-accent);
+    padding-bottom: variables.$spacing-2;
+    font-family: variables.$font-family-primary;
+}
+
+.circuitInfo,
+.raceInfo,
+.winnerInfo,
+.sessionSchedule {
+    background: var(--bg-secondary);
+    border-radius: variables.$radius-lg;
+    padding: variables.$spacing-6;
+    border: 1px solid var(--border-primary);
+    transition: all variables.$transition-fast;
+
+    &:hover {
+        border-color: var(--border-secondary);
+    }
+}
+
+.circuitDetails,
+.raceDetails,
+.winnerDetails {
+    display: flex;
+    flex-direction: column;
+    gap: variables.$spacing-3;
+}
+
+.circuitName {
+    font-size: variables.$font-size-xl;
+    font-weight: variables.$font-weight-semibold;
+    color: var(--text-primary);
+    font-family: variables.$font-family-primary;
+}
+
+.circuitLocation {
+    color: var(--text-secondary);
+    font-size: variables.$font-size-sm;
+}
+
+.circuitStats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: variables.$spacing-4;
+    margin-top: variables.$spacing-4;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    gap: variables.$spacing-1;
+}
+
+.statLabel {
+    font-size: variables.$font-size-xs;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: variables.$font-weight-medium;
+}
+
+.statValue {
+    font-size: variables.$font-size-sm;
+    font-weight: variables.$font-weight-medium;
+    color: var(--text-primary);
+}
+
+.raceDateTime {
+    display: flex;
+    flex-direction: column;
+    gap: variables.$spacing-2;
+}
+
+.raceDate {
+    font-size: variables.$font-size-lg;
+    font-weight: variables.$font-weight-semibold;
+    color: var(--text-primary);
+    font-family: variables.$font-family-primary;
+}
+
+.raceTime {
+    font-size: variables.$font-size-base;
+    color: var(--text-accent);
+    font-weight: variables.$font-weight-medium;
+}
+
+.timezoneInfo {
+    font-size: variables.$font-size-xs;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: variables.$spacing-2;
+}
+
+.winnerDetails {
+    display: flex;
+    flex-direction: column;
+    gap: variables.$spacing-2;
+}
+
+.winnerName {
+    font-size: variables.$font-size-lg;
+    font-weight: variables.$font-weight-semibold;
+    color: var(--text-primary);
+    font-family: variables.$font-family-primary;
+}
+
+.winnerTeam {
+    color: var(--text-secondary);
+    font-size: variables.$font-size-sm;
+}
+
+// Mobile styles
+@include mixins.mobile {
+    .raceDetails {
+        gap: variables.$spacing-6;
+    }
+
+    .circuitInfo,
+    .raceInfo,
+    .winnerInfo,
+    .sessionSchedule {
+        padding: variables.$spacing-4;
+    }
+
+    .circuitStats {
+        grid-template-columns: 1fr;
+        gap: variables.$spacing-3;
+    }
+
+    .sectionTitle {
+        font-size: variables.$font-size-base;
+        margin-bottom: variables.$spacing-3;
+    }
+}
