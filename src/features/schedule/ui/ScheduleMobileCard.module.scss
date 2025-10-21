@@ -115,6 +115,127 @@
     }
 }
 
+.nextRace {
+    border: 2px solid #dc2626;
+    background: linear-gradient(
+        135deg,
+        rgba(220, 38, 38, 0.15) 0%,
+        rgba(220, 38, 38, 0.08) 100%
+    );
+    position: relative;
+    animation: nextRacePulse 2s ease-in-out infinite;
+    transform: scale(1.02);
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(
+            90deg,
+            #dc2626 0%,
+            #ef4444 50%,
+            #f87171 100%
+        );
+        border-radius: variables.$radius-sm variables.$radius-sm 0 0;
+    }
+
+    .cardHeader {
+        .statusBadge {
+            background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+            font-weight: variables.$font-weight-bold;
+        }
+
+        .roundBadge {
+            background: rgba(220, 38, 38, 0.1);
+            color: #dc2626;
+            border: 1px solid rgba(220, 38, 38, 0.2);
+        }
+    }
+
+    .cardContent {
+        .raceName {
+            color: #dc2626;
+            font-weight: variables.$font-weight-bold;
+        }
+
+        .circuitInfo {
+            .circuitName {
+                color: #b91c1c;
+                font-weight: variables.$font-weight-semibold;
+            }
+        }
+    }
+}
+
+.upcomingRace {
+    border: 2px solid var(--color-info);
+    background: linear-gradient(
+        135deg,
+        var(--background-primary) 0%,
+        rgba(var(--color-info-rgb), 0.05) 100%
+    );
+    position: relative;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(
+            90deg,
+            var(--color-info) 0%,
+            var(--color-info-light) 100%
+        );
+        border-radius: variables.$radius-sm variables.$radius-sm 0 0;
+    }
+
+    .cardHeader {
+        .statusBadge {
+            background: var(--color-info);
+            color: var(--color-info-contrast);
+            box-shadow: 0 2px 4px rgba(var(--color-info-rgb), 0.2);
+        }
+    }
+
+    .cardContent {
+        .raceName {
+            color: var(--color-info);
+            font-weight: variables.$font-weight-bold;
+        }
+
+        .circuitInfo {
+            .circuitName {
+                color: var(--color-info-dark);
+            }
+        }
+    }
+}
+
+@keyframes nextRacePulse {
+    0%,
+    100% {
+        background: linear-gradient(
+            135deg,
+            rgba(220, 38, 38, 0.15) 0%,
+            rgba(220, 38, 38, 0.08) 100%
+        );
+    }
+    50% {
+        background: linear-gradient(
+            135deg,
+            rgba(220, 38, 38, 0.2) 0%,
+            rgba(220, 38, 38, 0.12) 100%
+        );
+    }
+}
+
 // Responsive design
 @include mixins.mobile {
     .card {

@@ -13,6 +13,7 @@ interface TableProps<T = Record<string, any>> {
     data: T[];
     renderCell?: (value: any, column: TableColumn, row: T) => ReactNode;
     className?: string;
+    getRowClassName?: (row: T, index: number) => string;
 }
 
 export const Table = <T extends Record<string, any>>({
@@ -20,6 +21,7 @@ export const Table = <T extends Record<string, any>>({
     data,
     renderCell,
     className = "",
+    getRowClassName,
 }: TableProps<T>) => {
     const tableClasses = [styles.table, className].filter(Boolean).join(" ");
 
@@ -51,7 +53,7 @@ export const Table = <T extends Record<string, any>>({
                         (row as any).position && (row as any).position <= 3;
                     const position = (row as any).position;
 
-                    const getRowClassName = () => {
+                    const getDefaultRowClassName = () => {
                         if (!isTopThree) return styles.tableRow;
 
                         switch (position) {
@@ -66,10 +68,21 @@ export const Table = <T extends Record<string, any>>({
                         }
                     };
 
+                    const defaultRowClassName = getDefaultRowClassName();
+                    const customRowClassName = getRowClassName
+                        ? getRowClassName(row, index)
+                        : "";
+                    const finalRowClassName = [
+                        defaultRowClassName,
+                        customRowClassName,
+                    ]
+                        .filter(Boolean)
+                        .join(" ");
+
                     return (
                         <div
                             key={index}
-                            className={getRowClassName()}
+                            className={finalRowClassName}
                             style={{ gridTemplateColumns }}
                         >
                             {columns.map((column) => (

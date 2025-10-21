@@ -1,14 +1,24 @@
-import { Table, TableSkeleton } from "@/shared/ui";
+import { Table, TableSkeleton, Button } from "@/shared/ui";
 import { Badge } from "@/shared/ui";
 import { F1Race } from "@/shared/api/types/f1Api";
 import { useSchedule } from "@/shared/lib/f1/useSchedule";
 import { useIsMobile } from "@/shared/lib/hooks/useMediaQuery";
 import { ScheduleMobileCard } from "./ScheduleMobileCard";
+import {
+    filterRaces,
+    getRaceStatus,
+    getStatusVariant,
+    getStatusDisplayText,
+    isRaceUpcoming,
+    isNextRace,
+} from "@/shared/lib/utils/scheduleUtils";
+import { useState } from "react";
 import styles from "./ScheduleTable.module.scss";
 
 export const ScheduleTable = () => {
     const { schedule } = useSchedule();
     const isMobile = useIsMobile();
+    const [showCompletedRaces, setShowCompletedRaces] = useState(false);
 
     const columns = [
         {
@@ -54,31 +64,13 @@ export const ScheduleTable = () => {
         });
     };
 
-    const getRaceStatus = (race: F1Race) => {
-        const now = new Date();
-        const raceDate = race.schedule.race.date
-            ? new Date(race.schedule.race.date)
-            : null;
-
-        if (!raceDate) return "TBD";
-
-        if (race.winner) return "Completed";
-        if (raceDate < now) return "Ongoing";
-        return "Upcoming";
+    const handleToggleCompletedRaces = () => {
+        setShowCompletedRaces(!showCompletedRaces);
     };
 
-    const getStatusVariant = (status: string) => {
-        switch (status) {
-            case "Completed":
-                return "success";
-            case "Ongoing":
-                return "warning";
-            case "Upcoming":
-                return "info";
-            default:
-                return "secondary";
-        }
-    };
+    const filteredRaces = schedule.data
+        ? filterRaces(schedule.data, showCompletedRaces)
+        : [];
 
     const renderCell = (value: any, column: any, row: F1Race) => {
         switch (column.key) {
@@ -127,7 +119,9 @@ export const ScheduleTable = () => {
             case "status":
                 const status = getRaceStatus(row);
                 return (
-                    <Badge variant={getStatusVariant(status)}>{status}</Badge>
+                    <Badge variant={getStatusVariant(status)}>
+                        {getStatusDisplayText(status)}
+                    </Badge>
                 );
 
             default:
@@ -172,7 +166,17 @@ export const ScheduleTable = () => {
     return (
         <div className={styles.tableSection}>
             <div className={styles.tableHeader}>
-                <h3>Race Schedule</h3>
+                <div className={styles.headerTop}>
+                    <h3>Race Schedule</h3>
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={handleToggleCompletedRaces}
+                        className={styles.toggleButton}
+                    >
+                        {showCompletedRaces ? "Hide" : "Show"} Completed Races
+                    </Button>
+                </div>
                 <div className={styles.tableMeta}>
                     <span className={styles.season}>
                         {schedule.season} Season
@@ -186,21 +190,40 @@ export const ScheduleTable = () => {
                               ).toLocaleDateString()
                             : "Unknown"}
                     </span>
+                    <span className={styles.divider}>•</span>
+                    <span className={styles.raceCount}>
+                        Showing {filteredRaces.length} of{" "}
+                        {schedule.data?.length || 0} races
+                    </span>
                 </div>
             </div>
 
             {isMobile ? (
                 <div className={styles.mobileContainer}>
-                    {schedule.data.map((race) => (
-                        <ScheduleMobileCard key={race.raceId} race={race} />
+                    {filteredRaces.map((race) => (
+                        <ScheduleMobileCard
+                            key={race.raceId}
+                            race={race}
+                            isUpcoming={isRaceUpcoming(race)}
+                            isNextRace={isNextRace(race, schedule.data || [])}
+                        />
                     ))}
                 </div>
             ) : (
                 <Table
                     columns={columns}
-                    data={schedule.data}
+                    data={filteredRaces}
                     renderCell={renderCell}
                     className={styles.table}
+                    getRowClassName={(race) => {
+                        if (isNextRace(race, schedule.data || [])) {
+                            return styles.nextRaceRow;
+                        }
+                        if (isRaceUpcoming(race)) {
+                            return styles.upcomingRaceRow;
+                        }
+                        return "";
+                    }}
                 />
             )}
         </div>

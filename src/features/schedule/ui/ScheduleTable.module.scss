@@ -12,9 +12,15 @@
 
 .tableHeader {
     display: flex;
+    flex-direction: column;
+    gap: variables.$spacing-4;
+    margin-bottom: variables.$spacing-6;
+}
+
+.headerTop {
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: variables.$spacing-6;
     flex-wrap: wrap;
     gap: variables.$spacing-4;
 }
@@ -37,6 +43,119 @@
 
 .divider {
     color: var(--border-secondary);
+}
+
+.toggleButton {
+    white-space: nowrap;
+    font-size: variables.$font-size-sm;
+    background: var(--bg-secondary) !important;
+    border: 1px solid var(--border-primary) !important;
+    color: var(--text-primary) !important;
+    padding: variables.$spacing-2 variables.$spacing-4 !important;
+    border-radius: variables.$radius-md !important;
+    transition: all variables.$transition-normal !important;
+
+    &:hover {
+        background: var(--bg-hover) !important;
+        border-color: var(--color-primary) !important;
+        color: var(--color-primary) !important;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    &:focus {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+    }
+}
+
+.raceCount {
+    color: var(--text-muted);
+    font-weight: variables.$font-weight-medium;
+}
+
+.nextRaceRow {
+    background: linear-gradient(
+        135deg,
+        rgba(220, 38, 38, 0.15) 0%,
+        rgba(220, 38, 38, 0.08) 100%
+    ) !important;
+    border-left: 4px solid #dc2626;
+    position: relative;
+    animation: nextRacePulse 2s ease-in-out infinite;
+
+    &:hover {
+        background: linear-gradient(
+            135deg,
+            rgba(220, 38, 38, 0.2) 0%,
+            rgba(220, 38, 38, 0.12) 100%
+        ) !important;
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(
+            90deg,
+            #dc2626 0%,
+            #ef4444 50%,
+            #f87171 100%
+        );
+    }
+}
+
+.upcomingRaceRow {
+    background: linear-gradient(
+        135deg,
+        var(--background-primary) 0%,
+        rgba(var(--color-info-rgb), 0.08) 100%
+    ) !important;
+    border-left: 4px solid var(--color-info);
+    position: relative;
+
+    &:hover {
+        background: linear-gradient(
+            135deg,
+            var(--bg-hover) 0%,
+            rgba(var(--color-info-rgb), 0.12) 100%
+        ) !important;
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(
+            90deg,
+            var(--color-info) 0%,
+            transparent 100%
+        );
+    }
+}
+
+@keyframes nextRacePulse {
+    0%,
+    100% {
+        background: linear-gradient(
+            135deg,
+            rgba(220, 38, 38, 0.15) 0%,
+            rgba(220, 38, 38, 0.08) 100%
+        ) !important;
+    }
+    50% {
+        background: linear-gradient(
+            135deg,
+            rgba(220, 38, 38, 0.2) 0%,
+            rgba(220, 38, 38, 0.12) 100%
+        ) !important;
+    }
 }
 
 .table {
@@ -119,6 +238,19 @@
         align-items: flex-start;
         gap: variables.$spacing-3;
         margin-bottom: variables.$spacing-4;
+    }
+
+    .headerTop {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: variables.$spacing-3;
+    }
+
+    .toggleButton {
+        width: 100%;
+        justify-content: center;
+        padding: variables.$spacing-3 variables.$spacing-4 !important;
+        font-size: variables.$font-size-base !important;
     }
 
     .tableHeader h3 {
