@@ -1,0 +1,260 @@
+@use "../../styles/variables";
+@use "../../styles/mixins";
+
+.tableSkeleton {
+    background: var(--bg-secondary);
+    border-radius: variables.$radius-xl;
+    overflow: hidden;
+    border: 1px solid var(--border-primary);
+}
+
+.tableHead {
+    display: grid;
+    grid-template-columns: 60px 1fr 200px 100px 100px;
+    background: var(--bg-tertiary);
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.tableBody {
+    display: flex;
+    flex-direction: column;
+}
+
+.skeletonRow {
+    display: grid;
+    grid-template-columns: 60px 1fr 200px 100px 100px;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-primary);
+    transition: all variables.$transition-fast;
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.skeletonHeaderCell,
+.skeletonCell {
+    padding: variables.$spacing-4;
+    display: flex;
+    align-items: center;
+}
+
+.skeletonHeaderCell {
+    background: linear-gradient(
+        90deg,
+        var(--bg-skeleton) 25%,
+        var(--bg-skeleton-shimmer) 50%,
+        var(--bg-skeleton) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: variables.$radius-sm;
+    height: 20px;
+    margin: variables.$spacing-2 0;
+}
+
+.skeletonCell {
+    background: linear-gradient(
+        90deg,
+        var(--bg-skeleton) 25%,
+        var(--bg-skeleton-shimmer) 50%,
+        var(--bg-skeleton) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: variables.$radius-sm;
+    height: 16px;
+    margin: variables.$spacing-1 0;
+}
+
+// Специальные стили для разных колонок
+.skeletonRow .skeletonCell:nth-child(1) {
+    width: 40px;
+    height: 24px;
+    border-radius: variables.$radius-full;
+}
+
+.skeletonRow .skeletonCell:nth-child(2) {
+    width: 80%;
+}
+
+.skeletonRow .skeletonCell:nth-child(3) {
+    width: 60%;
+}
+
+.skeletonRow .skeletonCell:nth-child(4),
+.skeletonRow .skeletonCell:nth-child(5) {
+    width: 50px;
+    justify-self: center;
+}
+
+// Mobile Card Skeleton
+.mobileContainer {
+    display: flex;
+    flex-direction: column;
+    gap: variables.$spacing-3;
+}
+
+.mobileCardSkeleton {
+    background: var(--bg-card);
+    border: 1px solid var(--border-primary);
+    border-radius: variables.$radius-lg;
+    padding: variables.$spacing-4;
+    transition: all variables.$transition-fast;
+}
+
+.cardHeader {
+    display: flex;
+    align-items: center;
+    gap: variables.$spacing-3;
+    margin-bottom: variables.$spacing-4;
+}
+
+.skeletonBadge {
+    width: 40px;
+    height: 24px;
+    background: linear-gradient(
+        90deg,
+        var(--bg-skeleton) 25%,
+        var(--bg-skeleton-shimmer) 50%,
+        var(--bg-skeleton) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: variables.$radius-full;
+}
+
+.skeletonTitle {
+    flex: 1;
+    height: 20px;
+    background: linear-gradient(
+        90deg,
+        var(--bg-skeleton) 25%,
+        var(--bg-skeleton-shimmer) 50%,
+        var(--bg-skeleton) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: variables.$radius-sm;
+}
+
+.cardContent {
+    display: flex;
+    flex-direction: column;
+    gap: variables.$spacing-3;
+}
+
+.skeletonField {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: variables.$spacing-2 0;
+    border-bottom: 1px solid var(--border-primary);
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.skeletonLabel {
+    width: 80px;
+    height: 12px;
+    background: linear-gradient(
+        90deg,
+        var(--bg-skeleton) 25%,
+        var(--bg-skeleton-shimmer) 50%,
+        var(--bg-skeleton) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: variables.$radius-sm;
+}
+
+.skeletonValue {
+    width: 60px;
+    height: 14px;
+    background: linear-gradient(
+        90deg,
+        var(--bg-skeleton) 25%,
+        var(--bg-skeleton-shimmer) 50%,
+        var(--bg-skeleton) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: variables.$radius-sm;
+}
+
+// Shimmer animation
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* Mobile specific styles */
+@include mixins.mobile {
+    .tableHead {
+        display: none;
+    }
+
+    .tableBody {
+        display: flex;
+        flex-direction: column;
+        gap: variables.$spacing-3;
+    }
+
+    .skeletonRow {
+        display: flex;
+        flex-direction: column;
+        background: var(--bg-card);
+        border: 1px solid var(--border-primary);
+        border-radius: variables.$radius-lg;
+        padding: variables.$spacing-4;
+        gap: variables.$spacing-3;
+    }
+
+    .skeletonCell {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: variables.$spacing-2 0;
+        border-bottom: 1px solid var(--border-primary);
+        height: auto;
+        margin: 0;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        &::before {
+            content: "";
+            width: 80px;
+            height: 12px;
+            background: linear-gradient(
+                90deg,
+                var(--bg-skeleton) 25%,
+                var(--bg-skeleton-shimmer) 50%,
+                var(--bg-skeleton) 75%
+            );
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: variables.$radius-sm;
+        }
+    }
+}
+
+/* Tablet adjustments */
+@include mixins.tablet {
+    .tableHead,
+    .skeletonRow {
+        grid-template-columns: 55px 1fr 180px 90px 90px;
+    }
+
+    .skeletonHeaderCell,
+    .skeletonCell {
+        padding: variables.$spacing-3 variables.$spacing-2;
+    }
+}

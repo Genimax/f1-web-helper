@@ -143,12 +143,14 @@
     flex-wrap: wrap;
     gap: variables.$spacing-6;
     z-index: 3;
+    min-height: 171px;
 }
 
 .logo {
     display: flex;
     align-items: center;
     gap: variables.$spacing-4;
+    position: relative;
 }
 
 .logoIcon {
@@ -202,6 +204,7 @@
     .headerContent {
         padding: variables.$spacing-6 0;
         gap: variables.$spacing-4;
+        min-height: 196px;
     }
 
     .logo {
@@ -235,6 +238,7 @@
     .headerContent {
         padding: variables.$spacing-6 0;
         gap: variables.$spacing-4;
+        min-height: 196px;
     }
 
     .logo {
@@ -271,6 +275,7 @@
     @media (min-width: 900px) {
         .headerContent {
             padding: variables.$spacing-8 0;
+            min-height: 196px;
         }
 
         .logoText h1 {
@@ -288,7 +293,7 @@
         flex-direction: column;
         text-align: center;
         padding: variables.$spacing-6 0;
-        min-height: 341px;
+        min-height: 280px;
     }
     .headerActions {
         flex-direction: column;

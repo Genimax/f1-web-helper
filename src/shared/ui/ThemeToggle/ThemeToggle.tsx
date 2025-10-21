@@ -5,22 +5,35 @@ import { toggleTheme } from "@/shared/lib/store/slices/themeSlice";
 import styles from "./ThemeToggle.module.scss";
 
 export const ThemeToggle = () => {
-  const dispatch = useAppDispatch();
-  const { theme } = useAppSelector((state) => state.theme);
+    const dispatch = useAppDispatch();
+    const { theme } = useAppSelector((state) => state.theme);
 
-  const handleToggle = () => {
-    dispatch(toggleTheme());
-  };
+    const handleThemeChange = (newTheme: "light" | "dark") => {
+        if (newTheme !== theme) {
+            dispatch(toggleTheme());
+        }
+    };
 
-  return (
-    <button
-      className={styles.themeToggle}
-      onClick={handleToggle}
-      aria-label="Toggle theme"
-    >
-      <span className={styles.themeIcon}>
-        {theme === "dark" ? "🌙" : "☀️"}
-      </span>
-    </button>
-  );
+    return (
+        <div className={styles.themeToggle}>
+            <button
+                className={`${styles.themeOption} ${
+                    theme === "light" ? styles.active : ""
+                }`}
+                onClick={() => handleThemeChange("light")}
+                aria-label="Switch to light theme"
+            >
+                Light
+            </button>
+            <button
+                className={`${styles.themeOption} ${
+                    theme === "dark" ? styles.active : ""
+                }`}
+                onClick={() => handleThemeChange("dark")}
+                aria-label="Switch to dark theme"
+            >
+                Dark
+            </button>
+        </div>
+    );
 };

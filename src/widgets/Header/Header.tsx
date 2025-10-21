@@ -26,7 +26,6 @@ export const Header = () => {
 
                     <div className={styles.headerActions}>
                         <CountdownTimer />
-                        <ThemeToggle />
                     </div>
                 </div>
             </div>

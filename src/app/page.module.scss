@@ -9,6 +9,20 @@
     color: var(--text-primary);
 }
 
+.themeToggleWrapper {
+    display: flex;
+    justify-content: center;
+    padding: variables.$spacing-2 0;
+    background: transparent;
+    border-bottom: 1px solid var(--border-primary);
+    opacity: 0.4;
+    transition: opacity variables.$transition-normal;
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
 .main {
     flex: 1;
     padding: variables.$spacing-12 0;

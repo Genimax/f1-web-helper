@@ -1,4 +1,4 @@
-import { Table } from "@/shared/ui";
+import { Table, TableSkeleton } from "@/shared/ui";
 import { Badge } from "@/shared/ui";
 import { F1ConstructorChampionshipEntry } from "@/shared/api/types/f1Api";
 import { useF1Data } from "@/shared/lib/f1/useF1Data";
@@ -76,9 +76,13 @@ export const TeamStandingsTable = () => {
     if (constructorsChampionship.loading) {
         return (
             <div className={styles.tableSection}>
-                <div className={styles.loading}>
-                    <p>Loading constructors championship data...</p>
+                <div className={styles.tableHeader}>
+                    <h3>Constructor Standings</h3>
+                    <div className={styles.tableMeta}>
+                        <span className={styles.season}>Loading...</span>
+                    </div>
                 </div>
+                <TableSkeleton rows={10} columns={4} />
             </div>
         );
     }

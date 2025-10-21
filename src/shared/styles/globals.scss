@@ -74,6 +74,10 @@ body {
     --border-primary: #{variables.$border-primary};
     --border-secondary: #{variables.$border-secondary};
     --border-accent: #{variables.$border-accent};
+
+    // Skeleton colors
+    --bg-skeleton: #{color.adjust(variables.$bg-card, $lightness: 5%)};
+    --bg-skeleton-shimmer: #{color.adjust(variables.$bg-card, $lightness: 15%)};
 }
 
 // Light theme
@@ -92,6 +96,13 @@ body {
     --border-primary: #{variables.$border-primary-light};
     --border-secondary: #{variables.$border-secondary-light};
     --border-accent: #{variables.$border-accent-light};
+
+    // Skeleton colors for light theme
+    --bg-skeleton: #{color.adjust(variables.$bg-card-light, $lightness: -5%)};
+    --bg-skeleton-shimmer: #{color.adjust(
+            variables.$bg-card-light,
+            $lightness: 5%
+        )};
 }
 
 // Typography
@@ -268,6 +279,40 @@ button {
 
     &:hover {
         background: var(--text-muted);
+    }
+}
+
+// Hide scrollbar on mobile and small tablet devices
+@include mixins.mobile {
+    // Hide scrollbar but keep functionality
+    * {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* Internet Explorer 10+ */
+    }
+
+    *::-webkit-scrollbar {
+        display: none; /* WebKit browsers */
+    }
+
+    // Ensure smooth scrolling is maintained
+    html {
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+// Hide scrollbar on small tablets (640px - 768px) for touch devices
+@media (min-width: 640px) and (max-width: 768px) {
+    * {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* Internet Explorer 10+ */
+    }
+
+    *::-webkit-scrollbar {
+        display: none; /* WebKit browsers */
+    }
+
+    html {
+        -webkit-overflow-scrolling: touch;
     }
 }
 

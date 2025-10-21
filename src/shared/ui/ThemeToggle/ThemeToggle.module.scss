@@ -2,27 +2,75 @@
 @use "../../styles/mixins";
 
 .themeToggle {
-    @include mixins.flex-center;
-    width: 48px;
-    height: 48px;
-    border-radius: variables.$radius-full;
-    background: var(--bg-card);
-    border: 1px solid var(--border-primary);
-    transition: all variables.$transition-normal;
-    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    gap: variables.$spacing-2;
+    align-items: center;
+    font-size: 9px;
+    font-weight: variables.$font-weight-normal;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    opacity: 0.6;
+    transition: opacity variables.$transition-normal;
 
     &:hover {
-        background: var(--bg-hover);
-        border-color: var(--border-secondary);
-        transform: scale(1.05);
+        opacity: 0.9;
     }
 }
 
-.themeIcon {
-    font-size: 1.5rem;
-    transition: transform variables.$transition-bounce;
+.themeOption {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 9px;
+    font-weight: variables.$font-weight-normal;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: variables.$spacing-1;
+    border-radius: variables.$radius-sm;
+    transition: all variables.$transition-fast;
+    position: relative;
+    line-height: 1;
+
+    &:hover {
+        color: var(--text-secondary);
+        background: rgba(0, 0, 0, 0.05);
+    }
+
+    &.active {
+        color: var(--text-primary);
+        font-weight: variables.$font-weight-medium;
+        background: rgba(0, 0, 0, 0.1);
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
 }
 
-.themeToggle:hover .themeIcon {
-    transform: rotate(180deg);
+// Адаптивные стили для мобильных устройств
+@include mixins.mobile {
+    .themeToggle {
+        font-size: 8px;
+        gap: variables.$spacing-1;
+    }
+
+    .themeOption {
+        font-size: 8px;
+        padding: 2px;
+    }
+}
+
+// Стили для маленьких планшетов
+@media (min-width: 640px) and (max-width: 768px) {
+    .themeToggle {
+        font-size: 8px;
+        gap: variables.$spacing-1;
+    }
+
+    .themeOption {
+        font-size: 8px;
+        padding: 2px;
+    }
 }

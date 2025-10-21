@@ -4,3 +4,5 @@ export { Badge } from "./Badge/Badge";
 export { ThemeToggle } from "./ThemeToggle/ThemeToggle";
 export { MobileCard } from "./MobileCard/MobileCard";
 export { CountdownTimer } from "./CountdownTimer/CountdownTimer";
+export { TableSkeleton } from "./TableSkeleton/TableSkeleton";
+export { MobileCardSkeleton } from "./TableSkeleton/MobileCardSkeleton";

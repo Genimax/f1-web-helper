@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { useNextRace } from "@/shared/lib/f1/useF1Data";
 import styles from "./CountdownTimer.module.scss";
