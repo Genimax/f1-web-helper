@@ -2,19 +2,38 @@
 @use "../../../shared/styles/mixins";
 
 .card {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: variables.$spacing-6;
+    box-shadow: variables.$shadow-md;
+    border: 2px solid variables.$border-primary;
+    transition: all variables.$transition-normal;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: variables.$shadow-lg;
+        border-color: variables.$border-accent;
+    }
+
     .cardHeader {
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
         align-items: flex-start;
-        margin-bottom: variables.$spacing-4;
+        margin-bottom: variables.$spacing-6;
+        position: relative;
+        z-index: 2;
+        transition: all 0.2s ease;
+        min-height: 80px;
+        padding: variables.$spacing-2 0;
     }
 
     .raceDateTime {
         display: flex;
         flex-direction: column;
-        align-items: flex-end;
-        text-align: right;
+        align-items: flex-start;
+        text-align: left;
         gap: variables.$spacing-1;
+        flex: 1;
     }
 
     .raceDate {
@@ -28,17 +47,39 @@
         font-size: variables.$font-size-sm;
         color: var(--text-primary);
         font-weight: variables.$font-weight-semibold;
-        text-align: right;
+        text-align: left;
+    }
+
+    .statusContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: variables.$spacing-1;
+        min-width: 120px;
+    }
+
+    .statusBadge {
+        padding: variables.$spacing-2 variables.$spacing-3;
+        border-radius: variables.$radius-sm;
+        font-size: variables.$font-size-xs;
+        font-weight: variables.$font-weight-bold;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
 }
 
 .cardContent {
+    position: relative;
+    z-index: 2;
+
     .raceName {
         margin: 0 0 variables.$spacing-4 0;
         font-size: variables.$font-size-lg;
         font-weight: variables.$font-weight-bold;
         color: var(--text-primary);
         line-height: 1.3;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     }
 
     .circuitLocation {
@@ -48,10 +89,16 @@
     }
 
     .winnerInfo {
-        padding: variables.$spacing-2;
-        background: var(--background-secondary);
+        padding: variables.$spacing-3;
+        background: linear-gradient(
+            135deg,
+            var(--background-secondary) 0%,
+            rgba(var(--color-success-rgb), 0.05) 100%
+        );
+        border: 1px solid rgba(var(--color-success-rgb), 0.2);
         border-radius: variables.$radius-md;
         margin-bottom: variables.$spacing-4;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 
         .winnerLabel {
             font-size: variables.$font-size-xs;
@@ -88,15 +135,17 @@
 }
 
 .nextRace {
-    border: 2px solid #dc2626;
+    border: 2px solid variables.$f1-red;
     background: linear-gradient(
         135deg,
-        rgba(220, 38, 38, 0.15) 0%,
-        rgba(220, 38, 38, 0.08) 100%
+        rgba(225, 6, 0, 0.15) 0%,
+        rgba(225, 6, 0, 0.08) 100%
     );
     position: relative;
     animation: nextRacePulse 2s ease-in-out infinite;
     transform: scale(1.02);
+    box-shadow: variables.$shadow-lg, variables.$glow-red;
+    margin-bottom: variables.$spacing-3;
 
     &::before {
         content: "";
@@ -107,22 +156,27 @@
         height: 4px;
         background: linear-gradient(
             90deg,
-            #dc2626 0%,
-            #ef4444 50%,
-            #f87171 100%
+            variables.$f1-red 0%,
+            variables.$f1-red-dark 50%,
+            variables.$f1-red 100%
         );
         border-radius: variables.$radius-sm variables.$radius-sm 0 0;
     }
 
+    .statusBadge {
+        background: variables.$f1-red;
+        color: white;
+    }
+
     .cardContent {
         .raceName {
-            color: #dc2626;
+            color: variables.$f1-red;
             font-weight: variables.$font-weight-bold;
         }
 
         .circuitInfo {
             .circuitName {
-                color: #b91c1c;
+                color: variables.$f1-red-dark;
                 font-weight: variables.$font-weight-semibold;
             }
         }
@@ -130,13 +184,15 @@
 }
 
 .upcomingRace {
-    border: 2px solid var(--color-info);
+    border: 2px solid variables.$f1-blue;
     background: linear-gradient(
         135deg,
-        var(--background-primary) 0%,
-        rgba(var(--color-info-rgb), 0.05) 100%
+        variables.$bg-primary 0%,
+        rgba(0, 210, 190, 0.05) 100%
     );
     position: relative;
+    box-shadow: variables.$shadow-md, variables.$glow-blue;
+    margin-bottom: variables.$spacing-3;
 
     &::before {
         content: "";
@@ -147,23 +203,20 @@
         height: 4px;
         background: linear-gradient(
             90deg,
-            var(--color-info) 0%,
-            var(--color-info-light) 100%
+            variables.$f1-blue 0%,
+            variables.$f1-blue 100%
         );
         border-radius: variables.$radius-sm variables.$radius-sm 0 0;
     }
 
-    .cardHeader {
-        .statusBadge {
-            background: var(--color-info);
-            color: var(--color-info-contrast);
-            box-shadow: 0 2px 4px rgba(var(--color-info-rgb), 0.2);
-        }
+    .statusBadge {
+        background: variables.$f1-blue;
+        color: white;
     }
 
     .cardContent {
         .raceName {
-            color: var(--color-info);
+            color: variables.$f1-blue;
             font-weight: variables.$font-weight-bold;
         }
     }
@@ -174,45 +227,68 @@
     100% {
         background: linear-gradient(
             135deg,
-            rgba(220, 38, 38, 0.15) 0%,
-            rgba(220, 38, 38, 0.08) 100%
+            rgba(225, 6, 0, 0.15) 0%,
+            rgba(225, 6, 0, 0.08) 100%
         );
+        box-shadow: variables.$shadow-lg, variables.$glow-red;
     }
     50% {
         background: linear-gradient(
             135deg,
-            rgba(220, 38, 38, 0.2) 0%,
-            rgba(220, 38, 38, 0.12) 100%
+            rgba(225, 6, 0, 0.2) 0%,
+            rgba(225, 6, 0, 0.12) 100%
         );
+        box-shadow: variables.$shadow-xl, variables.$glow-red;
     }
+}
+
+@keyframes cardSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: cardSlideIn 0.5s ease-out;
 }
 
 // Responsive design
 @include mixins.mobile {
     .card {
-        padding: variables.$spacing-3 !important;
-        margin-bottom: variables.$spacing-3 !important;
+        padding: variables.$spacing-4 !important;
+        margin-bottom: variables.$spacing-5 !important;
 
         .cardHeader {
-            justify-content: flex-end !important;
+            justify-content: space-between !important;
             align-items: flex-start !important;
-            margin-bottom: variables.$spacing-2 !important;
+            margin-bottom: variables.$spacing-4 !important;
+            min-height: 60px !important;
         }
 
         .raceDateTime {
-            align-items: flex-end !important;
-            text-align: right !important;
-            gap: 2px !important;
+            align-items: flex-start !important;
+            text-align: left !important;
+            gap: variables.$spacing-1 !important;
+            flex: 1 !important;
+        }
+
+        .statusContainer {
+            min-width: 100px !important;
         }
 
         .raceDate {
-            text-align: right !important;
+            text-align: left !important;
             font-size: variables.$font-size-xs !important;
             line-height: 1.2 !important;
         }
 
         .raceTime {
-            text-align: right !important;
+            text-align: left !important;
             font-size: variables.$font-size-xs !important;
             line-height: 1.2 !important;
         }
@@ -256,12 +332,17 @@
 // Extra small mobile devices
 @media (max-width: 480px) {
     .card {
-        padding: variables.$spacing-2 !important;
-        margin-bottom: variables.$spacing-2 !important;
+        padding: variables.$spacing-3 !important;
+        margin-bottom: variables.$spacing-4 !important;
 
         .cardHeader {
-            justify-content: flex-end !important;
-            margin-bottom: variables.$spacing-1 !important;
+            justify-content: space-between !important;
+            margin-bottom: variables.$spacing-3 !important;
+            min-height: 50px !important;
+        }
+
+        .statusContainer {
+            min-width: 80px !important;
         }
     }
 

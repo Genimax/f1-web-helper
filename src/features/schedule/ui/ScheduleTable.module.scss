@@ -165,7 +165,8 @@
 .mobileContainer {
     display: flex;
     flex-direction: column;
-    gap: variables.$spacing-3;
+    gap: variables.$spacing-6;
+    padding: variables.$spacing-4 0;
 }
 
 .raceInfo {

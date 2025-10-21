@@ -37,6 +37,14 @@ export const ScheduleMobileCard = ({
                         </div>
                     )}
                 </div>
+                <div className={styles.statusContainer}>
+                    {isNextRace && (
+                        <div className={styles.statusBadge}>NEXT RACE</div>
+                    )}
+                    {isUpcoming && !isNextRace && (
+                        <div className={styles.statusBadge}>UPCOMING</div>
+                    )}
+                </div>
             </div>
 
             <div className={styles.cardContent}>
