@@ -1,0 +1,9 @@
+services:
+  f1-web-helper:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: f1-web-helper
+    restart: unless-stopped
+    env_file:
+      - .env
