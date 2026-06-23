@@ -22,7 +22,10 @@ export async function GET(request: NextRequest) {
     });
   } catch (error) {
     console.error('Error fetching constructors championship:', error);
-    
+
+    console.log('Error details:', error instanceof Error ? error.message : error);
+    console.log('Stack trace:', error instanceof Error ? error.stack : 'No stack trace available');
+
     return NextResponse.json(
       { error: 'Failed to fetch constructors championship data' },
       { status: 500 }

@@ -7,6 +7,7 @@ import type { RootState } from "@/shared/lib/store";
 import { DriverStandingsTable } from "@/features/driver-standings/ui/DriverStandingsTable";
 import { TeamStandingsTable } from "@/features/team-standings/ui/TeamStandingsTable";
 import { ScheduleTable } from "@/features/schedule/ui/ScheduleTable";
+import { ChampionshipCalculator } from "@/features/championship-calculator/ui/ChampionshipCalculator";
 import styles from "./ChampionshipModule.module.scss";
 
 type TabType = "drivers" | "teams" | "schedule" | "calculator";
@@ -68,15 +69,7 @@ export const ChampionshipModule = () => {
             case "schedule":
                 return <ScheduleTable />;
             case "calculator":
-                return (
-                    <div className={styles.placeholder}>
-                        <h3>Championship Calculator Coming Soon</h3>
-                        <p>
-                            Calculate minimum points needed for championship
-                            will be available here.
-                        </p>
-                    </div>
-                );
+                return <ChampionshipCalculator />;
             default:
                 return null;
         }
