@@ -12,9 +12,9 @@
 
 <div align="center">
 
-### 🚀 [**ПОСМОТРЕТЬ ПРОЕКТ**](https://f1-web-helper.vercel.app)
+### 🚀 [**ПОСМОТРЕТЬ ПРОЕКТ**](http://f1.genimax.ru/)
 
-[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-FF6B6B?style=for-the-badge&logo=vercel&logoColor=white)](https://f1-web-helper.vercel.app)
+[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-FF6B6B?style=for-the-badge&logo=vercel&logoColor=white)](http://f1.genimax.ru/)
 
 </div>
 
